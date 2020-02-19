@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 const SplashScreen = () => {
+  let styles = StyleSheet.create({
+    texto: {
+      color: "#fff",
+      fontSize: 40
+    },
+    con: {}
+  });
+//   useEffect()
   return (
-    <View>
-      <Text>Olá, Sesja</Text>
-      <Text>Bem vindo!</Text>
+    <View style={styles.con}>
+      <Text style={styles.texto}>Olá, Seja</Text>
+      <Text style={styles.texto}>Bem vindo!</Text>
     </View>
   );
 };
