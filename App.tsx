@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Container } from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -18,9 +19,12 @@ export default function App() {
 
   return (
     loadFont && (
-      <View style={styles.container}>
-        <Text>Start</Text>
-      </View>
+      <Container>
+        <View style={styles.container}>
+          <Text style={styles.texto}>Olá, Seja</Text>
+          <Text style={styles.texto}>Bem vindo!</Text>
+        </View>
+      </Container>
     )
   );
 }
@@ -28,8 +32,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#009bdb",
     alignItems: "center",
     justifyContent: "center"
+  },
+  texto: {
+    color: "#fff",
+    fontSize: 40
   }
 });
