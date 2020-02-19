@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Children } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Container } from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
+import { Root } from "native-base";
+import { setNavigator } from "./router/Navigation";
+import { Routes } from "./router/Router";
 
 export default function App() {
   const [loadFont, setLoadFont] = useState(false);
@@ -19,12 +21,11 @@ export default function App() {
 
   return (
     loadFont && (
-      <Container>
+      <Root>
         <View style={styles.container}>
-          <Text style={styles.texto}>Olá, Seja</Text>
-          <Text style={styles.texto}>Bem vindo!</Text>
+          <Routes refe={setNavigator} />
         </View>
-      </Container>
+      </Root>
     )
   );
 }
