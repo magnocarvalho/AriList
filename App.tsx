@@ -34,16 +34,9 @@ export default function App() {
 
   return (
     loadFont && (
-      <Router history={history}>
-        <Switch history={history}>
-          <UIProvider theme={theme} amp={false}>
-            <StatusBar></StatusBar>
-            <View style={styles.container}>
-              <Routes refe={setNavigator} />
-            </View>
-          </UIProvider>
-        </Switch>
-      </Router>
+      <View style={styles.container}>
+        <Routes refe={setNavigator} />
+      </View>
     )
   );
 }
