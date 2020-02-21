@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import SplashScreen from "../pages/splash";
 import Inicio from "../pages/inicio";
 import Servicos from "../pages/servicos";
+import ListaDocs from "../pages/listaDocs";
 
 export function useRouter() {
   const Routes = createAppContainer(
@@ -10,7 +11,8 @@ export function useRouter() {
       {
         SplashScreen,
         Servicos,
-        Inicio
+        Inicio,
+        ListaDocs
       },
       {
         initialRouteName: "SplashScreen"

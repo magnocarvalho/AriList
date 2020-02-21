@@ -25,6 +25,22 @@ const BotaoServicos = ({ nome, subtitle, icon = "office-building" }) => {
           />
         )}
       />
+      {ctrOpen && (
+        <>
+          <Card.Content>
+            <Text style={{ textAlign: "justify" }}>
+              Infos {subtitle} Lorem Ipsum is simply dummy text of the printing
+              and typesetting industry. Lorem Ipsum {subtitle} has been the
+              industry's standard dummy text ever since the 1500s {subtitle}
+            </Text>
+          </Card.Content>
+          <Card.Actions>
+            <Button style={{ flex: 1 }} mode="contained">
+              Listagem de Documentos
+            </Button>
+          </Card.Actions>
+        </>
+      )}
     </Card>
   );
 };
