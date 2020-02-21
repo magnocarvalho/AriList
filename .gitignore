@@ -12,3 +12,8 @@ web-report/
 
 # macOS
 .DS_Store
+/node_modules
+/web-build
+/.expo
+/.expo-shared
+/.vscode
