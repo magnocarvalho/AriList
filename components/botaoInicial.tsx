@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet, Animated } from "react-native";
 
 const BotaoInicial = ({ nome, numero, escolha = null }) => {
+
   const estilo = StyleSheet.create({
     botoes: {
       paddingHorizontal: 20,
@@ -15,7 +16,7 @@ const BotaoInicial = ({ nome, numero, escolha = null }) => {
       backgroundColor: "#fff",
       flex: 1,
       flexDirection: "row",
-      height: 60,
+      height: 61,
       alignSelf: "stretch",
       justifyContent: "space-between",
       marginVertical: 5
