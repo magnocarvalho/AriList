@@ -17,3 +17,6 @@ web-report/
 /.expo
 /.expo-shared
 /.vscode
+.expo-shared
+.vscode
+.expo

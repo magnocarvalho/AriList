@@ -25,7 +25,7 @@ const SplashScreen = () => {
   useEffect(() => {
     setTimeout(
       () => {
-        navigate("Inicio");
+        navigate("Servicos");
       },
       __DEV__ ? 1000 : 2000
     );

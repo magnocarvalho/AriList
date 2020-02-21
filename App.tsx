@@ -1,42 +1,31 @@
-import React, { useEffect, useState, Children } from "react";
-import { StyleSheet, Text, View, YellowBox, StatusBar } from "react-native";
-import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-import { Root } from "native-base";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, YellowBox } from "react-native";
 import { setNavigator } from "./router/Navigation";
 import { Routes } from "./router/Router";
-import { UIProvider, Router, Switch } from "react-native-web-ui-components";
-import { createMemoryHistory } from "history";
+import { Provider as PaperProvider } from "react-native-paper";
+
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
 
-const history = createMemoryHistory();
-const theme = {
-  input: {
-    focused: StyleSheet.create({
-      border: {
-        borderColor: "yellow"
-      }
-    })
-  }
-};
 export default function App() {
-  const [loadFont, setLoadFont] = useState(false);
+  const [loadFont] = useState(true);
 
   useEffect(() => {
-    Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
-      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      ...Ionicons.font
-    }).then(() => {
-      setLoadFont(true);
-    });
+    // Font.loadAsync({
+    //   Roboto: require("native-base/Fonts/Roboto.ttf"),
+    //   Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+    //   ...Ionicons.font
+    // }).then(() => {
+    //   setLoadFont(true);
+    // });
   }, []);
 
   return (
     loadFont && (
-      <View style={styles.container}>
-        <Routes refe={setNavigator} />
-      </View>
+      <PaperProvider>
+        <View style={styles.container}>
+          <Routes refe={setNavigator} />
+        </View>
+      </PaperProvider>
     )
   );
 }
