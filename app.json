@@ -3,13 +3,9 @@
     "name": "ARI list",
     "slug": "arilist",
     "privacy": "public",
+    "version": "0.0.1",
     "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,9 +16,11 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.ari.ro",
+      "versionCode": 1
+    },
     "ios": {
       "supportsTablet": true
     }

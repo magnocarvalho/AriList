@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { TouchableOpacity, View, Text, StyleSheet, Animated } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Animated
+} from "react-native";
 
 const BotaoInicial = ({ nome, numero, escolha = null }) => {
-
   const estilo = StyleSheet.create({
     botoes: {
       paddingHorizontal: 20,
@@ -32,30 +37,34 @@ const BotaoInicial = ({ nome, numero, escolha = null }) => {
     }
   });
   return (
-    <TouchableOpacity
-      onPress={() => {
-        escolha ? escolha() : alert("apenas para teste use 1º regiao");
-      }}
-    >
-      <View style={estilo.botao}>
-        <View
-          style={[
-            estilo.botoes,
-            {
-              backgroundColor: "#d78d12",
-              alignItems: "center",
-              alignContent: "center",
-              marginRight: 10
-            }
-          ]}
-        >
-          <Text style={[estilo.textBotao]}>{numero}</Text>
+    <View>
+      <TouchableOpacity
+        onPress={() => {
+          escolha ? escolha() : alert("apenas para teste use 1º regiao");
+        }}
+      >
+        <View style={estilo.botao}>
+          <View
+            style={[
+              estilo.botoes,
+              {
+                backgroundColor: "#d78d12",
+                alignItems: "center",
+                alignContent: "center",
+                marginRight: 10
+              }
+            ]}
+          >
+            <Text style={[estilo.textBotao]}>{numero}</Text>
+          </View>
+          <View
+            style={[estilo.botoes, { backgroundColor: "#009bdb", flex: 1 }]}
+          >
+            <Text style={[estilo.textBotao]}>{nome}</Text>
+          </View>
         </View>
-        <View style={[estilo.botoes, { backgroundColor: "#009bdb", flex: 1 }]}>
-          <Text style={[estilo.textBotao]}>{nome}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 export default BotaoInicial;

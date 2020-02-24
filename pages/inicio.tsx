@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -18,7 +18,36 @@ const Inicio = () => {
   const botao1 = new Animated.Value(0);
   const botao2 = new Animated.Value(0);
   const botao3 = new Animated.Value(0);
+  useEffect(() => {
+    return Animated.timing(opacity, {
+      toValue: 1,
+      duration: 1000
+    }).start();
+  }, []);
 
+  useEffect(() => {
+    return Animated.timing(botao1, {
+      toValue: 1,
+      duration: 1000
+    }).start();
+  }, []);
+
+  useLayoutEffect(() => {
+    return Animated.timing(botao2, {
+      toValue: 1,
+      duration: 1000
+    }).start();
+
+    [];
+  });
+  useLayoutEffect(() => {
+    return Animated.timing(botao3, {
+      toValue: 1,
+
+      duration: 1000
+    }).start();
+    [];
+  });
   const estilo = StyleSheet.create({
     page: {
       flex: 1,
@@ -26,9 +55,10 @@ const Inicio = () => {
     },
     controle: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "stretch",
-      alignSelf: "center",
+      // justifyContent: "center",
+      // alignItems: "stretch",
+      // alignSelf: "center",
+      elevation: 5,
       padding: 30
     },
     divprinciapl: {
@@ -49,56 +79,34 @@ const Inicio = () => {
     }
   });
 
-  useEffect(() => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 1000
-    }).start();
-    Animated.timing(botao1, {
-      toValue: 1,
-      delay: 0,
-      useNativeDriver: true,
-      duration: 1000
-    }).start();
-    Animated.timing(botao2, {
-      toValue: 1,
-      useNativeDriver: true,
-      delay: 500,
-      duration: 1000
-    }).start();
-    Animated.timing(botao3, {
-      toValue: 1,
-      delay: 1000,
-      duration: 1000
-    }).start();
-  }, []);
-
   const escolha = () => {
     return navigate("Servicos");
   };
 
   return (
     <View style={estilo.page}>
-      <View style={estilo.divprinciapl}>
-        <View style={estilo.controle}>
-          <Text style={estilo.titulo}>
-            <Animated.Text style={{ opacity }}>{ola}</Animated.Text>
-          </Text>
-          <Animated.View style={{ opacity: botao1 }}>
-            <BotaoInicial
-              numero={"1°"}
-              nome={"SRI"}
-              escolha={() => escolha()}
-            ></BotaoInicial>
-          </Animated.View>
-          <Animated.View style={{ opacity: botao2 }}>
-            <BotaoInicial numero={"2°"} nome={"SRI"}></BotaoInicial>
-          </Animated.View>
-          <Animated.View style={{ opacity: botao3 }}>
-            <BotaoInicial numero={"3°"} nome={"SRI"}></BotaoInicial>
-          </Animated.View>
+      <ScrollView>
+        <View style={estilo.divprinciapl}>
+          <View style={estilo.controle}>
+            <Text style={estilo.titulo}>
+              <Animated.Text style={{ opacity }}>{ola}</Animated.Text>
+            </Text>
+            <Animated.View style={{ opacity: botao1 }}>
+              <BotaoInicial
+                numero={"1°"}
+                nome={"SRI"}
+                escolha={() => escolha()}
+              ></BotaoInicial>
+            </Animated.View>
+            <Animated.View style={{ opacity: botao2 }}>
+              <BotaoInicial numero={"2°"} nome={"SRI"}></BotaoInicial>
+            </Animated.View>
+            <Animated.View style={{ opacity: botao3 }}>
+              <BotaoInicial numero={"3°"} nome={"SRI"}></BotaoInicial>
+            </Animated.View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

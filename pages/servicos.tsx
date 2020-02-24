@@ -2,6 +2,11 @@ import { View, Text, ScrollView } from "react-native";
 import React, { useEffect } from "react";
 import MyHeader from "../components/myHeader";
 import BotaoServicos from "../components/botaoServicos";
+import { navigate } from "../router/Navigation";
+import {
+  handleAndroidBackButton,
+  removeAndroidBackButtonHandler
+} from "../router/androidBackButton";
 
 const Servicos = () => {
   useEffect(() => {
@@ -9,9 +14,13 @@ const Servicos = () => {
     //   effect;
     // };
   }, []);
+  useEffect(() => {
+    handleAndroidBackButton(() => navigate("Inicio"));
+    return removeAndroidBackButtonHandler;
+  }, []);
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
-      <MyHeader></MyHeader>
+      <MyHeader goBack={() => navigate("Inicio")} iconEvent="info"></MyHeader>
       <ScrollView>
         <View>
           <Text
@@ -28,6 +37,7 @@ const Servicos = () => {
             nome="Alteração Estado civil"
             subtitle="Alteração de estado Civil"
             icon="heart-broken"
+            servico={() => navigate("ListaDocs")}
           ></BotaoServicos>
           <BotaoServicos
             nome="Escritura RURAL"

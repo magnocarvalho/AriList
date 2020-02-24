@@ -8,9 +8,18 @@ import {
   Paragraph,
   IconButton
 } from "react-native-paper";
+import { navigate } from "../router/Navigation";
 
-const BotaoServicos = ({ nome, subtitle, icon = "office-building" }) => {
+const BotaoServicos = ({
+  nome,
+  subtitle,
+  icon = "office-building",
+  servico
+}) => {
   const [ctrOpen, setCtrOpen] = useState(false);
+  const goServico = () => {
+    return servico ? servico() : alert("Use Alteração de estado civil");
+  };
   return (
     <Card style={{ margin: 5, elevation: 5 }}>
       <Card.Title
@@ -35,7 +44,11 @@ const BotaoServicos = ({ nome, subtitle, icon = "office-building" }) => {
             </Text>
           </Card.Content>
           <Card.Actions>
-            <Button style={{ flex: 1 }} mode="contained">
+            <Button
+              style={{ flex: 1 }}
+              mode="contained"
+              onPress={() => goServico()}
+            >
               Listagem de Documentos
             </Button>
           </Card.Actions>
