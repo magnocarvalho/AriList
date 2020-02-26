@@ -8,6 +8,7 @@ import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
+import Circunscricao from "../components/circunscricao";
 
 const ListaDocs = () => {
   const [salvo, setsalvo] = useState(false);
@@ -57,7 +58,8 @@ const ListaDocs = () => {
         iconEvent={salvarDados}
       ></MyHeader>
       <ScrollView>
-        <Card>
+        <Circunscricao goServico={() => setdoc1(!doc1)} doc={doc1}></Circunscricao>
+        {/* <Card>
           <Card.Title
             title="Documento 1"
             left={props => (
@@ -121,7 +123,7 @@ const ListaDocs = () => {
             )}
           ></Card.Title>
         </Card>
-        <Divider></Divider>
+        <Divider></Divider> */}
       </ScrollView>
       <Snackbar visible={salvo} onDismiss={() => setsalvo(false)}>
         Progresso salvo com sucesso
