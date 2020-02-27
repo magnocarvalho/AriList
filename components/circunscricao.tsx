@@ -8,7 +8,7 @@ import {
   IconButton,
   Text
 } from "react-native-paper";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, Image, Switch, CheckBox } from "react-native";
 
 const Circunscricao = ({ goServico, doc }) => {
   const [ctrOpen, setCtrOpen] = useState(false);
@@ -37,15 +37,36 @@ const Circunscricao = ({ goServico, doc }) => {
         {ctrOpen && (
           <>
             <Card.Content>
-              <Text style={{ textAlign: "justify" }}>
-                Verificar se o endereço do imóvel corresponde às dependências da
-                2º Circunscrição se sim selecione como preenchido.
-              </Text>
+              <View>
+                <Text style={{ textAlign: "justify", marginBottom: 5 }}>
+                  Verificar se o endereço do imóvel corresponde às dependências
+                  da 2º Circunscrição se sim selecione como preenchido, Lei 21XXXX.XXXX.
+                </Text>
+              </View>
             </Card.Content>
+            <Card.Cover
+              style={{ marginRight: 1 }}
+              resizeMode="cover"
+              source={require("../assets/map1.png")}
+            ></Card.Cover>
             <Card.Actions>
-              <Button mode="contained" onPress={() => goServico()}>
-                Confere<Text></Text>
-              </Button>
+              <View
+                style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
+              >
+                <TouchableOpacity
+                  onPress={() => goServico()}
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    alignItems: "center"
+                  }}
+                >
+                  <CheckBox value={doc} onValueChange={() => {}}></CheckBox>
+                  <Text style={{ flex: 1, marginLeft: 5 }} ellipsizeMode="tail">
+                    Confirmar o endereço dentro da 2º Circunscrição
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </Card.Actions>
           </>
         )}

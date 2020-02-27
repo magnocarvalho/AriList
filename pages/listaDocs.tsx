@@ -9,6 +9,7 @@ import {
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
 import Circunscricao from "../components/circunscricao";
+import Requerimento from "../components/requerimento";
 
 const ListaDocs = () => {
   const [salvo, setsalvo] = useState(false);
@@ -59,6 +60,7 @@ const ListaDocs = () => {
       ></MyHeader>
       <ScrollView>
         <Circunscricao goServico={() => setdoc1(!doc1)} doc={doc1}></Circunscricao>
+        <Requerimento goServico={() => setdoc2(!doc2)} doc={doc2}></Requerimento>
         {/* <Card>
           <Card.Title
             title="Documento 1"
