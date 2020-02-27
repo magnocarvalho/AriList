@@ -40,7 +40,7 @@ const BotaoInicial = ({ nome, numero, escolha = null }) => {
     <View>
       <TouchableOpacity
         onPress={() => {
-          escolha ? escolha() : alert("apenas para teste use 1º regiao");
+          escolha ? escolha() : alert("apenas para teste use 2º regiao");
         }}
       >
         <View style={estilo.botao}>

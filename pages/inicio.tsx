@@ -92,14 +92,14 @@ const Inicio = () => {
               <Animated.Text style={{ opacity }}>{ola}</Animated.Text>
             </Text>
             <Animated.View style={{ opacity: botao1 }}>
+              <BotaoInicial numero={"1°"} nome={"SRI"}></BotaoInicial>
+            </Animated.View>
+            <Animated.View style={{ opacity: botao2 }}>
               <BotaoInicial
-                numero={"1°"}
+                numero={"2°"}
                 nome={"SRI"}
                 escolha={() => escolha()}
               ></BotaoInicial>
-            </Animated.View>
-            <Animated.View style={{ opacity: botao2 }}>
-              <BotaoInicial numero={"2°"} nome={"SRI"}></BotaoInicial>
             </Animated.View>
             <Animated.View style={{ opacity: botao3 }}>
               <BotaoInicial numero={"3°"} nome={"SRI"}></BotaoInicial>

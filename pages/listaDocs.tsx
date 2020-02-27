@@ -10,6 +10,7 @@ import {
 } from "../router/androidBackButton";
 import Circunscricao from "../components/circunscricao";
 import Requerimento from "../components/requerimento";
+import Certidao from "../components/certidao";
 
 const ListaDocs = () => {
   const [salvo, setsalvo] = useState(false);
@@ -59,8 +60,15 @@ const ListaDocs = () => {
         iconEvent={salvarDados}
       ></MyHeader>
       <ScrollView>
-        <Circunscricao goServico={() => setdoc1(!doc1)} doc={doc1}></Circunscricao>
-        <Requerimento goServico={() => setdoc2(!doc2)} doc={doc2}></Requerimento>
+        <Circunscricao
+          goServico={() => setdoc1(!doc1)}
+          doc={doc1}
+        ></Circunscricao>
+        <Requerimento
+          goServico={() => setdoc2(!doc2)}
+          doc={doc2}
+        ></Requerimento>
+        <Certidao goServico={() => setdoc3(!doc3)} doc={doc3}></Certidao>
         {/* <Card>
           <Card.Title
             title="Documento 1"
