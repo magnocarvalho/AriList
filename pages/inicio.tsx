@@ -9,13 +9,14 @@ import {
   Animated,
   StatusBar
 } from "react-native";
-
+import Spinner from "react-native-loading-spinner-overlay";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
 import { Card, Avatar } from "react-native-paper";
 import { getLocation } from "../services/localizacao";
 
 const Inicio = () => {
+  const [load, setload] = useState(false);
   const estilo = StyleSheet.create({
     texto: {
       fontSize: 25,
@@ -30,6 +31,14 @@ const Inicio = () => {
     <>
       <StatusBar barStyle="light-content"></StatusBar>
       <View style={{ flex: 1, backgroundColor: "#009bdb" }}>
+        <Spinner
+          visible={load}
+          textContent={"Carregando..."}
+          textStyle={{ fontSize: 18, color: "#FFF" }}
+          overlayColor="#009bdb"
+          animation="fade"
+          color="#FFF"
+        />
         <View
           style={{
             flex: 1,
@@ -42,20 +51,22 @@ const Inicio = () => {
         >
           <View>
             <Text style={estilo.texto}>
-              Antes de começarmos, precisamos que informe a localização do
-              imovel a ser atendido, nas opçoes abaixo:
+              Antes de começarmos, precisamos que informe a endereço do imovel a
+              ser atendido, nas opçoes abaixo
             </Text>
           </View>
           <View>
-            <TouchableOpacity
-              onPress={() => {
-                getLocation();
+            <Card
+              style={{
+                margin: 5,
+                elevation: 5
               }}
             >
-              <Card
-                style={{
-                  margin: 5,
-                  elevation: 5
+              <TouchableOpacity
+                onPress={async () => {
+                  setload(true);
+                  const local = await getLocation();
+                  setload(false);
                 }}
               >
                 <Card.Title
@@ -64,8 +75,8 @@ const Inicio = () => {
                     <Avatar.Icon {...props} icon="crosshairs-gps" />
                   )}
                 ></Card.Title>
-              </Card>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </Card>
             <Text
               style={{
                 textAlign: "center",
@@ -84,10 +95,16 @@ const Inicio = () => {
                 elevation: 5
               }}
             >
-              <Card.Title
-                title="Informar o endereço"
-                left={props => <Avatar.Icon {...props} icon="google-maps" />}
-              ></Card.Title>
+              <TouchableOpacity
+                onPress={() => {
+                  navigate("MapaEndereco");
+                }}
+              >
+                <Card.Title
+                  title="Informar o endereço"
+                  left={props => <Avatar.Icon {...props} icon="google-maps" />}
+                ></Card.Title>
+              </TouchableOpacity>
             </Card>
           </View>
         </View>

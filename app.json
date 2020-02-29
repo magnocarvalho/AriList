@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ARI list",
+    "name": "ARI List",
     "slug": "arilist",
     "privacy": "public",
     "version": "0.0.3",
@@ -19,7 +19,22 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.ari.ro",
-      "versionCode": 2
+      "versionCode": 2,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCQ60TcO17x5w7bLKVTWXfLIenYuudetoE"
+        }
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "com.htc.launcher.permission.READ_SETTINGS",
+        "com.htc.launcher.permission.UPDATE_SHORTCUT",
+        "com.majeur.launcher.permission.UPDATE_BADGE",
+        "com.sec.android.provider.badge.permission.READ",
+        "com.sec.android.provider.badge.permission.WRITE",
+        "com.sonyericsson.home.permission.BROADCAST_BADGE"
+      ]
     },
     "ios": {
       "supportsTablet": true
