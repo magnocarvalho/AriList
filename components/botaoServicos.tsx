@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import {
   Avatar,
   Button,
@@ -18,22 +18,24 @@ const BotaoServicos = ({
 }) => {
   const [ctrOpen, setCtrOpen] = useState(false);
   const goServico = () => {
-    return servico ? servico() : alert("Use Alteração de estado civil");
+    return servico ? servico() : alert("ops!! ainda nao foi feito");
   };
   return (
     <Card style={{ margin: 5, elevation: 5 }}>
-      <Card.Title
-        title={nome}
-        subtitle={subtitle}
-        left={props => <Avatar.Icon {...props} icon={icon} />}
-        right={props => (
-          <IconButton
-            {...props}
-            icon={ctrOpen ? "chevron-up" : "chevron-down"}
-            onPress={() => setCtrOpen(!ctrOpen)}
-          />
-        )}
-      />
+      <TouchableOpacity onPress={() => setCtrOpen(!ctrOpen)}>
+        <Card.Title
+          title={nome}
+          subtitle={subtitle}
+          left={props => <Avatar.Icon {...props} icon={icon} />}
+          right={props => (
+            <IconButton
+              {...props}
+              icon={ctrOpen ? "chevron-up" : "chevron-down"}
+              onPress={() => setCtrOpen(!ctrOpen)}
+            />
+          )}
+        />
+      </TouchableOpacity>
       {ctrOpen && (
         <>
           <Card.Content>

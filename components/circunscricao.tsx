@@ -40,7 +40,8 @@ const Circunscricao = ({ goServico, doc }) => {
               <View>
                 <Text style={{ textAlign: "justify", marginBottom: 5 }}>
                   Verificar se o endereço do imóvel corresponde às dependências
-                  da 2º Circunscrição se sim selecione como preenchido, Lei 21XXXX.XXXX.
+                  da 2º Circunscrição se sim selecione como preenchido, Lei
+                  21XXXX.XXXX.
                 </Text>
               </View>
             </Card.Content>
@@ -61,7 +62,12 @@ const Circunscricao = ({ goServico, doc }) => {
                     alignItems: "center"
                   }}
                 >
-                  <CheckBox value={doc} onValueChange={() => {}}></CheckBox>
+                  <CheckBox
+                    value={doc}
+                    onValueChange={() => {
+                      goServico();
+                    }}
+                  ></CheckBox>
                   <Text style={{ flex: 1, marginLeft: 5 }} ellipsizeMode="tail">
                     Confirmar o endereço dentro da 2º Circunscrição
                   </Text>

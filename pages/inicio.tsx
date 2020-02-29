@@ -12,8 +12,9 @@ import {
 import Spinner from "react-native-loading-spinner-overlay";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
-import { Card, Avatar } from "react-native-paper";
+import { Card, Avatar, Snackbar } from "react-native-paper";
 import { getLocation } from "../services/localizacao";
+import { testPoint } from "../services/calculePolygon";
 
 const Inicio = () => {
   const [load, setload] = useState(false);
@@ -27,6 +28,7 @@ const Inicio = () => {
       marginTop: 30
     }
   });
+  const [erroSnack, seterroSnack] = useState(false);
   return (
     <>
       <StatusBar barStyle="light-content"></StatusBar>
@@ -67,6 +69,16 @@ const Inicio = () => {
                   try {
                     setload(true);
                     const local = await getLocation();
+                    console.log({ local });
+                    let { inside, tipo } = await testPoint([
+                      local.longitude,
+                      local.latitude
+                    ]);
+                    if (inside) {
+                      navigate("Servicos", { tipo: tipo });
+                    } else {
+                      seterroSnack(true);
+                    }
                     setload(false);
                   } catch (error) {
                     setload(false);
@@ -120,6 +132,10 @@ const Inicio = () => {
           </View>
         </View>
       </View>
+      <Snackbar visible={erroSnack} onDismiss={() => seterroSnack(false)}>
+        Sua localização não esta dentro dos limites dos cartorios associados,
+        tente informar o endereço manualmente.
+      </Snackbar>
     </>
   );
 };

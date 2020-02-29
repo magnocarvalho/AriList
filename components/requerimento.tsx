@@ -48,7 +48,7 @@ const Requerimento = ({ goServico, doc }) => {
                   alignItems: "center"
                 }}
               >
-                <CheckBox value={doc} onValueChange={() => {}}></CheckBox>
+                <CheckBox value={doc} onValueChange={() => { goServico()}}></CheckBox>
                 <Text style={{ flex: 1, marginLeft: 5 }} ellipsizeMode="tail">
                   Confirmar o requerimento em mãos
                 </Text>

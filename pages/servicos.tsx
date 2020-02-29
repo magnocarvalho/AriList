@@ -7,8 +7,10 @@ import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
+import { Card, Title, Paragraph } from "react-native-paper";
 
-const Servicos = () => {
+const Servicos = ({ navigation }) => {
+  const tipo = navigation.getParam("tipo");
   useEffect(() => {
     // return () => {
     //   effect;
@@ -24,6 +26,49 @@ const Servicos = () => {
       <MyHeader goBack={() => navigate("Inicio")} iconEvent="info"></MyHeader>
       <ScrollView>
         <View>
+          {tipo == "primeiro" && (
+            <Card>
+              <Card.Cover source={require("../assets/cat1.png")}></Card.Cover>
+              <Card.Content>
+                <Title>1º Ofício de Imóveis</Title>
+                <Paragraph>
+                  Endereço: Residence Service - Av. Sete de Setembro, 2140 - 21
+                  - Nossa Sra. das Graças, Porto Velho - RO, 76804-124
+                </Paragraph>
+                <Paragraph>Horário: seg a sexta 08:00 até 15:00</Paragraph>
+                <Paragraph>Telefone: (69) 3015-1255</Paragraph>
+              </Card.Content>
+            </Card>
+          )}
+          {tipo == "segundo" && (
+            <Card>
+              <Card.Cover source={require("../assets/cat2.png")}></Card.Cover>
+              <Card.Content>
+                <Title>2º Ofício de Imóveis</Title>
+                <Paragraph>
+                  Endereço: Av. Carlos Gomes, 2581 - São Cristóvão, Porto Velho
+                  - RO, 76804-021
+                </Paragraph>
+                <Paragraph>Horário: seg a sexta 08:00 até 15:00</Paragraph>
+                <Paragraph>Telefone: (69) 3302-0602</Paragraph>
+              </Card.Content>
+            </Card>
+          )}
+
+          {tipo == "terceiro" && (
+            <Card>
+              <Card.Cover source={require("../assets/cat3.png")}></Card.Cover>
+              <Card.Content>
+                <Title>3° Ofício de Registro de Imóveis</Title>
+                <Paragraph>
+                  Endereço: R. Afonso Pena, 200-258 - Centro, Porto Velho - RO,
+                  76801-100
+                </Paragraph>
+                <Paragraph>Horário: seg a sexta 08:00 até 15:00</Paragraph>
+                <Paragraph>Telefone: (69) 3224-2864</Paragraph>
+              </Card.Content>
+            </Card>
+          )}
           <Text
             style={{
               fontSize: 25,
