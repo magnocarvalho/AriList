@@ -13,7 +13,6 @@ const Gsearch = ({ placeholder, onLocationSelected, location, ...props }) => {
       longitude={location.longitude}
       placeholder={placeholder}
       keyboardAppearance={"light"} // Can be left out for default keyboardAppearance https://facebook.github.io/react-native/docs/textinput.html#keyboardappearance
-      listViewDisplayed="auto"
       autoFocus={true}
       returnKeyType={"search"}
       onPress={(data, details = null) => onLocationSelected(data, details)}
@@ -25,6 +24,7 @@ const Gsearch = ({ placeholder, onLocationSelected, location, ...props }) => {
         location: `${location.latitude},${location.longitude}`,
         radius: 50000
       }}
+      listViewDisplayed={searchFocused}
       fetchDetails={true}
       currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
       nearbyPlacesAPI="GoogleReverseGeocoding"

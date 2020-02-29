@@ -26,7 +26,7 @@ const BuscarEndereco = ({ location, onLocationSelected }) => {
         onLocationSelected={(data, details = null) =>
           onLocationSelected(data, details)
         }
-        placeholder="Digite o endereco"
+        placeholder="Ex: Av Primeira, 007, Centro - Porto Velho - RO"
       ></Gsearch>
     </View>
   );

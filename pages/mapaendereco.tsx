@@ -7,11 +7,11 @@ import {
   StatusBar,
   TextInput
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MyHeader from "../components/myHeader";
 import BotaoServicos from "../components/botaoServicos";
 import { navigate } from "../router/Navigation";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 import {
@@ -20,19 +20,59 @@ import {
 } from "../router/androidBackButton";
 import BuscarEndereco from "../components/buscarEndereco";
 import useGSearch from "../services/useGSearch";
+import cordenates from "../cordenates.json";
+import { isMarkerInsidePolygon, testPoint } from "../services/calculePolygon";
 
 const MapaEndereco = ({ navigation }) => {
   const location = navigation.getParam("location");
+  const [titulo, setTitulo] = useState("Porto Velho");
+  const [loading, setloading] = useState(false);
+  const [regiao, setRegiao] = useState({
+    latitude: -8.770818,
+    longitude: -63.883033,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  });
+  const [latitude, setlatitude] = useState(-8.770818);
+  const [longitude, setlongitude] = useState(-63.883033);
+  const [validade, setvalidade] = useState(false);
   const { filter } = useGSearch();
+  const coordenadas1 = cordenates.primeiro;
   useEffect(() => {
     handleAndroidBackButton(() => navigate("Inicio"));
     return removeAndroidBackButtonHandler;
   }, []);
 
-  const onLocationSelected = (data, details = null) => {
-    // console.log({ data, details });
-    const { coordinates, local } = filter(details);
-    console.log({ coordinates, local });
+  const onLocationSelected = async (data, details = null) => {
+    try {
+      setloading(true);
+      // console.log("coordenadas1", coordenadas1.length);
+      const { formatted_address } = details;
+      const { coordinates, local } = await filter(details);
+
+      const { lat, lng } = coordinates;
+      // console.log({ coordinates, local, lat, lng });
+
+      setlatitude(lat);
+      setlongitude(lng);
+      setRegiao({
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      });
+      const ponto = [lng, lat];
+      let { inside, tipo } = await testPoint(ponto);
+      if (inside) {
+        console.log("true");
+      } else {
+        console.log("falso");
+      }
+      setTitulo(formatted_address);
+    } catch (error) {
+      console.log(error);
+    }
+    setloading(false);
   };
 
   const styles = StyleSheet.create({
@@ -47,6 +87,19 @@ const MapaEndereco = ({ navigation }) => {
       height: Dimensions.get("window").height
     }
   });
+
+  const MyMarker = () => {
+    return (
+      <Marker
+        title={titulo}
+        // description={description}
+        coordinate={{
+          latitude: latitude,
+          longitude: longitude
+        }}
+      ></Marker>
+    );
+  };
   return (
     <>
       <StatusBar></StatusBar>
@@ -65,27 +118,23 @@ const MapaEndereco = ({ navigation }) => {
             borderRadius: 10
           }}
         >
-          {/* <TextInput
-            style={{
-              margin: 8,
-              flex: 1,
-              flexDirection: "row",
-
-              backgroundColor: "#fff"
-            }}
-          ></TextInput> */}
-          <BuscarEndereco location={location} onLocationSelected={onLocationSelected}></BuscarEndereco>
+          <View style={{ flex: 1 }}>
+            <Text style={{ margin: 5 }}>Digite seu endereço completo:</Text>
+            <BuscarEndereco
+              location={location}
+              onLocationSelected={onLocationSelected}
+            ></BuscarEndereco>
+          </View>
         </View>
         <MapView
           style={styles.mapStyle}
-          initialRegion={{
-            latitude: -8.770818,
-            longitude: -63.883033,
+          region={{
+            latitude: latitude,
+            longitude: longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
           provider="google"
-          mapView="hybrid"
           showsUserLocation={true}
           followsUserLocation={true}
           showsMyLocationButton={true}
@@ -95,7 +144,9 @@ const MapaEndereco = ({ navigation }) => {
           rotateEnabled={false}
           maxZoomLevel={20}
           loadingEnabled={true}
-        />
+        >
+          {!loading && latitude && longitude ? <MyMarker></MyMarker> : <></>}
+        </MapView>
       </View>
     </>
   );

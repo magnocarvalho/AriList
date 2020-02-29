@@ -30,7 +30,7 @@ const Inicio = () => {
   return (
     <>
       <StatusBar barStyle="light-content"></StatusBar>
-      <View style={{ flex: 1,  backgroundColor: "#009bdb" }}>
+      <View style={{ flex: 1, backgroundColor: "#009bdb" }}>
         <Spinner
           visible={load}
           textContent={"Carregando..."}
@@ -64,9 +64,13 @@ const Inicio = () => {
             >
               <TouchableOpacity
                 onPress={async () => {
-                  setload(true);
-                  const local = await getLocation();
-                  setload(false);
+                  try {
+                    setload(true);
+                    const local = await getLocation();
+                    setload(false);
+                  } catch (error) {
+                    setload(false);
+                  }
                 }}
               >
                 <Card.Title
@@ -97,10 +101,14 @@ const Inicio = () => {
             >
               <TouchableOpacity
                 onPress={async () => {
-                  setload(true);
-                  const local = await getLocation();
-                  setload(false);
-                  navigate("MapaEndereco", { location: local });
+                  try {
+                    setload(true);
+                    const local = await getLocation();
+                    setload(false);
+                    navigate("MapaEndereco", { location: local });
+                  } catch (error) {
+                    setload(false);
+                  }
                 }}
               >
                 <Card.Title
