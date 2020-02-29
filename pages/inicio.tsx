@@ -35,7 +35,7 @@ const Inicio = () => {
           visible={load}
           textContent={"Carregando..."}
           textStyle={{ fontSize: 18, color: "#FFF" }}
-          overlayColor="#009bdb"
+          overlayColor="#009beb"
           animation="fade"
           color="#FFF"
         />

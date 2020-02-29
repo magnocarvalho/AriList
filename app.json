@@ -16,6 +16,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#3866e6"
+    },
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.ari.ro",
