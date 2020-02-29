@@ -6,6 +6,10 @@ export function setNavigator(ref) {
   navigator = ref;
 }
 
+export function getNavigator() {
+  return navigator;
+}
+
 export function navigate(routeName, params = undefined) {
   navigator.dispatch(
     NavigationActions.navigate({

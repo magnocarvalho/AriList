@@ -128,7 +128,7 @@ export const getLocation = async () => {
     const { coords } = await Location.getCurrentPositionAsync({
       accuracy: Location.Accuracy.Highest
     });
-    console.log({ coords });
+    // console.log({ coords });
     return coords;
   } catch (err) {
     throw err;

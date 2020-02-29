@@ -6,6 +6,7 @@ import Servicos from "../pages/servicos";
 import ListaDocs from "../pages/listaDocs";
 import MapaEndereco from "../pages/mapaendereco";
 
+
 export function useRouter() {
   const Routes = createAppContainer(
     createSwitchNavigator(

@@ -18,13 +18,23 @@ import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
+import BuscarEndereco from "../components/buscarEndereco";
+import useGSearch from "../services/useGSearch";
 
-const MapaEndereco = () => {
-  useEffect(() => {}, []);
+const MapaEndereco = ({ navigation }) => {
+  const location = navigation.getParam("location");
+  const { filter } = useGSearch();
   useEffect(() => {
     handleAndroidBackButton(() => navigate("Inicio"));
     return removeAndroidBackButtonHandler;
   }, []);
+
+  const onLocationSelected = (data, details = null) => {
+    // console.log({ data, details });
+    const { coordinates, local } = filter(details);
+    console.log({ coordinates, local });
+  };
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -50,7 +60,7 @@ const MapaEndereco = () => {
             right: 10,
             left: 10,
             position: "absolute",
-            backgroundColor: "#009beb",
+            backgroundColor: "#FFF",
             elevation: 8,
             borderRadius: 10
           }}
@@ -64,7 +74,7 @@ const MapaEndereco = () => {
               backgroundColor: "#fff"
             }}
           ></TextInput> */}
-          <GooglePlacesAutocomplete></GooglePlacesAutocomplete>
+          <BuscarEndereco location={location} onLocationSelected={onLocationSelected}></BuscarEndereco>
         </View>
         <MapView
           style={styles.mapStyle}
