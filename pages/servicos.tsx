@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StatusBar } from "react-native";
 import React, { useEffect } from "react";
 import MyHeader from "../components/myHeader";
 import BotaoServicos from "../components/botaoServicos";
@@ -20,6 +20,7 @@ const Servicos = () => {
   }, []);
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <StatusBar barStyle="default"></StatusBar>
       <MyHeader goBack={() => navigate("Inicio")} iconEvent="info"></MyHeader>
       <ScrollView>
         <View>

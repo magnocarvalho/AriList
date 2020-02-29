@@ -38,19 +38,28 @@ const MapaEndereco = ({ navigation }) => {
   const { filter } = useGSearch();
   const { focus } = useKeyboardListener();
   const coordenadas1 = cordenates.primeiro;
-  
+
   useEffect(() => {
     handleAndroidBackButton(() => navigate("Inicio"));
     return removeAndroidBackButtonHandler;
   }, []);
 
+  const moverPonteiro = async data => {
+    const { coordinate } = data;
+    checkLocal([coordinate.longitude, coordinate.latitude]);
+    setlatitude(coordinate.latitude);
+    setlongitude(coordinate.longitude);
+  };
+
   const checkLocal = async ponto => {
     let { inside, tipo } = await testPoint(ponto);
     if (inside) {
       console.log("true");
+      setRegiao(tipo);
       setvalidade(true);
     } else {
       setvalidade(false);
+      setRegiao(null);
       console.log("falso");
     }
   };
@@ -107,6 +116,7 @@ const MapaEndereco = ({ navigation }) => {
           latitude: latitude,
           longitude: longitude
         }}
+        onDragEnd={({ nativeEvent }) => moverPonteiro(nativeEvent)}
       ></Marker>
     );
   };
@@ -171,7 +181,9 @@ const MapaEndereco = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
-              style={{ alignSelf: "center", opacity: validade ? 1 : 0.4 }}
+              style={{ alignSelf: "center" }}
+              disabled={!validade}
+              onPress={() => navigate("Servicos", { tipo: regiao })}
             >
               <View
                 style={{
@@ -179,7 +191,8 @@ const MapaEndereco = ({ navigation }) => {
                   backgroundColor: "#009bdb",
                   paddingHorizontal: 45,
                   paddingVertical: 15,
-                  alignSelf: "center"
+                  alignSelf: "center",
+                  opacity: validade ? 1 : 0.4
                 }}
               >
                 <Text style={{ fontSize: 20 }}>

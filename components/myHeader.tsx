@@ -2,6 +2,7 @@ import * as React from "react";
 import { Appbar, IconButton } from "react-native-paper";
 import { navigateBack } from "../router/Navigation";
 import { StatusBar } from "react-native";
+import App from "~/App";
 
 const MyHeader = ({ goBack, titulo = null, icon = null, iconEvent = null }) => {
   const _handleSearch = () => console.log("Searching");
@@ -12,7 +13,7 @@ const MyHeader = ({ goBack, titulo = null, icon = null, iconEvent = null }) => {
 
   return (
     <>
-      <Appbar.Header>
+      <Appbar.Header statusBarHeight={0}>
         <Appbar.BackAction onPress={() => goBack()} />
         <Appbar.Content title={titulo || "ARI List"} />
         {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
