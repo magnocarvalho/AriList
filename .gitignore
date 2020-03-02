@@ -20,3 +20,5 @@ web-report/
 .expo-shared
 .vscode
 .expo
+/.expo-shared
+/.vscode

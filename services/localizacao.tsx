@@ -122,14 +122,26 @@ export const getReverseGeocode = async (lat, lon) => {
 };
 
 export const getLocation = async () => {
+  let permissao = null;
   try {
-    const permissao = await LocationService();
-    if (!permissao) throw "permisao negada";
-    const { coords } = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.Highest
-    });
-    // console.log({ coords });
-    return coords;
+    await LocationService()
+      .then(async permi => {
+        if (!permi) throw "permisao negada";
+        permissao = permi;
+      })
+      .catch(e => {
+        throw "falha na permissão";
+      });
+    console.log("permissao", permissao);
+    if (permissao) {
+      const { coords } = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Highest
+      });
+
+      return coords;
+    } else {
+      throw "permissão invalida";
+    }
   } catch (err) {
     throw err;
   }

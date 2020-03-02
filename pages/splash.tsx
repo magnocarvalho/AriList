@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Animated } from "react-native";
 import { navigate } from "../router/Navigation";
+import * as SecureStore from "expo-secure-store";
 
 const SplashScreen = () => {
   const welcome = ", Seja\nBem Vindo!";
@@ -25,7 +26,14 @@ const SplashScreen = () => {
   useEffect(() => {
     setTimeout(
       () => {
-        navigate("Inicio");
+        SecureStore.getItemAsync("zona").then(async tipo => {
+          console.log("tipo");
+          if (tipo) {
+            navigate("Servicos", { tipo: tipo });
+          } else {
+            navigate("Inicio");
+          }
+        });
       },
       __DEV__ ? 1000 : 2500
     );

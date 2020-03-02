@@ -15,6 +15,7 @@ import { navigate } from "../router/Navigation";
 import { Card, Avatar, Snackbar } from "react-native-paper";
 import { getLocation } from "../services/localizacao";
 import { testPoint } from "../services/calculePolygon";
+import * as SecureStore from "expo-secure-store";
 
 const Inicio = () => {
   const [load, setload] = useState(false);
@@ -28,6 +29,13 @@ const Inicio = () => {
       marginTop: 30
     }
   });
+  useEffect(() => {
+    return () => {
+      setTimeout(() => {
+        setload(false);
+      }, 5000);
+    };
+  }, [load]);
   const [erroSnack, seterroSnack] = useState(false);
   return (
     <>
@@ -75,6 +83,7 @@ const Inicio = () => {
                       local.latitude
                     ]);
                     if (inside) {
+                      await SecureStore.setItemAsync("zona", tipo);
                       navigate("Servicos", { tipo: tipo });
                     } else {
                       seterroSnack(true);

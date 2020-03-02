@@ -14,8 +14,8 @@ import MyHeader from "../components/myHeader";
 import BotaoServicos from "../components/botaoServicos";
 import { navigate } from "../router/Navigation";
 import MapView, { Marker } from "react-native-maps";
+import * as SecureStore from "expo-secure-store";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-
 import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler
@@ -57,6 +57,7 @@ const MapaEndereco = ({ navigation }) => {
       console.log("true");
       setRegiao(tipo);
       setvalidade(true);
+      SecureStore.setItemAsync("zona", tipo);
     } else {
       setvalidade(false);
       setRegiao(null);
