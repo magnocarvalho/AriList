@@ -27,7 +27,7 @@ const SplashScreen = () => {
     setTimeout(
       () => {
         SecureStore.getItemAsync("zona").then(async tipo => {
-          console.log("tipo");
+          console.log("zona", tipo);
           if (tipo) {
             navigate("Servicos", { tipo: tipo });
           } else {

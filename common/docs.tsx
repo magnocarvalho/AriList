@@ -12,7 +12,8 @@ import Circunscricao from "../components/circunscricao";
 import Requerimento from "../components/requerimento";
 import Certidao from "../components/certidao";
 
-const ListaDocs = () => {
+const Docs = ({ navigation }) => {
+  const docs = navigation.getParam("docs");
   const [salvo, setsalvo] = useState(false);
   const [doc1, setdoc1] = useState(false);
   const [doc2, setdoc2] = useState(false);
@@ -56,16 +57,14 @@ const ListaDocs = () => {
       <MyHeader
         goBack={() => navigate("Servicos")}
         titulo="Alteração de Estado Civil"
-        icon="content-save"
-        iconEvent={salvarDados}
+        // icon="content-save"
+        // iconEvent={salvarDados}
       ></MyHeader>
-      <ScrollView>
-        
-      </ScrollView>
+      <ScrollView></ScrollView>
       <Snackbar visible={salvo} onDismiss={() => setsalvo(false)}>
         Progresso salvo com sucesso
       </Snackbar>
     </View>
   );
 };
-export default ListaDocs;
+export default Docs;
