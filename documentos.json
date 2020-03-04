@@ -1,1 +1,32 @@
-{ "documentos": [{ "titulo": "ALTERAÇÃO DE ESTADO CIVIL" }] }
+{
+  "doc": [
+    {
+      "titulo": "Averbação",
+      "subtitulo": "Alteração do Estado Civil (averbação)",
+      "descricao": "As alterações de estado civil dos proprietários devem ser averbadas na matrícula pois, dependendo do regime de casamento (comunhão total, comunhão parcial ou separação de bens), os cônjuges precisam anuir com futuros negócios realizados com os imóveis.",
+      "id_servico": "123dj",
+      "lei": "Inciso II do art. 167 da Lei nº 6.216, de 1975",
+      "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+      "documentos": [
+        {
+          "id": "sfsfsafasfassdfsd",
+          "lei": "Inciso II do art. 167 da Lei nº 6.216, de 1975",
+          "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+          "value": "Requerimento com assinatura do proprietário com firma reconhecida, contendo o número da matrícula do imóvel"
+        },
+        {
+          "id": "sfasdsfsdfsdfsdfs",
+          "lei": "Inciso II do art. 167 da Lei nº 6.216, de 1975",
+          "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+          "value": "Certidão de casamento (ou divórcio) original ou xerox autenticada."
+        },
+        {
+          "id": "sdfsafasddfasdfasf",
+          "lei": "Inciso II do art. 167 da Lei nº 6.216, de 1975",
+          "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+          "value": "Escritura de Pacto Antenupcial original ou cópia autenticada pelo cartório que a lavrou. A Escritura não é exigida no caso de:\nCasamentos realizados antes de 26/12/77 pelo regime de Comunhão Universal de Bens;\nCasamentos realizados a partir de 26/12/77 pelo regime da Comunhão Parcial de Bens;\nCasamentos realizados pelo regime da Separação Obrigatória de Bens."
+        }
+      ]
+    }
+  ]
+}

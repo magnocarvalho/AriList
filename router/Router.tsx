@@ -5,7 +5,7 @@ import Inicio from "../pages/inicio";
 import Servicos from "../pages/servicos";
 import ListaDocs from "../pages/listaDocs";
 import MapaEndereco from "../pages/mapaendereco";
-
+import DocsComponente from "../common/docs"
 
 export function useRouter() {
   const Routes = createAppContainer(
@@ -15,7 +15,8 @@ export function useRouter() {
         Servicos,
         Inicio,
         ListaDocs,
-        MapaEndereco
+        MapaEndereco,
+        DocsComponente
       },
       {
         initialRouteName: "SplashScreen"

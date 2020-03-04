@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, StatusBar } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MyHeader from "../components/myHeader";
 import BotaoServicos from "../components/botaoServicos";
 import { navigate } from "../router/Navigation";
@@ -8,17 +8,25 @@ import {
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
 import { Card, Title, Paragraph } from "react-native-paper";
+import * as SecureStore from "expo-secure-store";
 
 const Servicos = ({ navigation }) => {
-  const tipo = navigation.getParam("tipo");
-  useEffect(() => {
-    // return () => {
-    //   effect;
-    // };
-  }, []);
+  const tipos = navigation.getParam("tipo");
+  const [tipo, settipo] = useState(null);
+
   useEffect(() => {
     handleAndroidBackButton(() => navigate("Inicio"));
     return removeAndroidBackButtonHandler;
+  }, []);
+
+  useEffect(() => {
+    SecureStore.getItemAsync("zona").then(t => {
+      if (!tipos) {
+        settipo(t);
+      } else {
+        settipo(tipos);
+      }
+    });
   }, []);
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -89,6 +97,7 @@ const Servicos = ({ navigation }) => {
             nome="Escritura RURAL"
             subtitle="Venda e compra de imóvel rural"
             icon="tractor"
+            servico={() => navigate("DocsComponente")}
           ></BotaoServicos>
           <BotaoServicos
             nome="Escritura URBANA"

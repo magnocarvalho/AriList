@@ -1,51 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, Switch } from "react-native";
+import { View, ScrollView, Switch, FlatList, Text } from "react-native";
 import MyHeader from "../components/myHeader";
-import { Card, Divider, Snackbar } from "react-native-paper";
+import {
+  Card,
+  Divider,
+  Snackbar,
+  Subheading,
+  TouchableRipple
+} from "react-native-paper";
 import { navigate } from "../router/Navigation";
 import * as SecureStore from "expo-secure-store";
 import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
-import Circunscricao from "../components/circunscricao";
-import Requerimento from "../components/requerimento";
-import Certidao from "../components/certidao";
+import { doc } from "../documentos.json";
+import ItemDocumento from "./item";
+import * as WebBrowser from "expo-web-browser";
 
-const Docs = ({ navigation }) => {
-  const docs = navigation.getParam("docs");
+const DocsComponente = ({ navigation }) => {
+  // const docs = navigation.getParam("docs");
   const [salvo, setsalvo] = useState(false);
-  const [doc1, setdoc1] = useState(false);
-  const [doc2, setdoc2] = useState(false);
-  const [doc3, setdoc3] = useState(false);
-  const [doc4, setdoc4] = useState(false);
-  const [doc5, setdoc5] = useState(false);
-
-  const salvarDados = async () => {
-    let lista = { doc1, doc2, doc3, doc4, doc5 };
-    // console.log({ lista });
-    let l = JSON.stringify(lista);
-    await SecureStore.setItemAsync("lista", l);
-    setsalvo(true);
+  const [docs, setDocs] = useState(doc[0]);
+  const [leis, setLeis] = useState([{ value: "", lei: "", link: "", id: "" }]);
+  const [result, setResult] = useState(null);
+  const _handlePressButtonAsync = async l => {
+    let result = await WebBrowser.openBrowserAsync(l);
+    setResult(result);
   };
-  const loadDados = () => {
-    SecureStore.getItemAsync("lista").then(async res => {
-      // console.log({ res });
-      if (res) {
-        let resposta = JSON.parse(res);
-        // console.log({ resposta });
-        setdoc1(resposta.doc1);
-        setdoc2(resposta.doc2);
-        setdoc3(resposta.doc3);
-        setdoc4(resposta.doc4);
-        setdoc5(resposta.doc5);
-      }
-    });
-  };
-
   useEffect(() => {
-    loadDados();
-  }, []);
+    // loadDados();
+    // console.log({docs});
+    setLeis(docs.documentos);
+    // setDocs(doc[0])
+  }, [docs]);
 
   useEffect(() => {
     handleAndroidBackButton(() => navigate("Servicos"));
@@ -53,18 +41,43 @@ const Docs = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+    <>
       <MyHeader
         goBack={() => navigate("Servicos")}
-        titulo="Alteração de Estado Civil"
-        // icon="content-save"
-        // iconEvent={salvarDados}
+        titulo={docs.titulo}
       ></MyHeader>
-      <ScrollView></ScrollView>
-      <Snackbar visible={salvo} onDismiss={() => setsalvo(false)}>
-        Progresso salvo com sucesso
-      </Snackbar>
-    </View>
+      <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+        <FlatList
+          ListHeaderComponent={
+            <Card>
+              <Card.Content>
+                <Subheading>{docs.descricao}</Subheading>
+                <TouchableRipple
+                  onPress={() => _handlePressButtonAsync(docs.link)}
+                >
+                  <Subheading style={{ textDecorationLine: "underline" }}>
+                    {docs.lei}
+                  </Subheading>
+                </TouchableRipple>
+              </Card.Content>
+            </Card>
+          }
+          data={leis}
+          renderItem={({ item }) => (
+            <ItemDocumento
+              value={item.value}
+              link={item.link}
+              lei={item.lei}
+              id={item.id}
+              titulo={docs.titulo}
+            ></ItemDocumento>
+          )}
+        ></FlatList>
+        <Snackbar visible={salvo} onDismiss={() => setsalvo(false)}>
+          Progresso salvo com sucesso
+        </Snackbar>
+      </View>
+    </>
   );
 };
-export default Docs;
+export default DocsComponente;
