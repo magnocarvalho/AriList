@@ -14,14 +14,14 @@ import {
   handleAndroidBackButton,
   removeAndroidBackButtonHandler
 } from "../router/androidBackButton";
-import { doc } from "../documentos.json";
+
 import ItemDocumento from "./item";
 import * as WebBrowser from "expo-web-browser";
 
 const DocsComponente = ({ navigation }) => {
-  // const docs = navigation.getParam("docs");
+  const docs = navigation.getParam("docs");
   const [salvo, setsalvo] = useState(false);
-  const [docs, setDocs] = useState(doc[0]);
+  // const [docs, setDocs] = useState(doc[0]);
   const [leis, setLeis] = useState([]);
   const [result, setResult] = useState(null);
   const _handlePressButtonAsync = async l => {

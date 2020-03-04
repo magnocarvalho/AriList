@@ -28,7 +28,7 @@ const ItemDocumento = ({ lei = null, link = null, value, id, titulo }) => {
     >
       <Card.Content>
         <View style={{ flex: 0, flexDirection: "row" }}>
-          <View style={{ flex: 0, paddingTop: 15 }}>
+          <View style={{ flex: 0, paddingTop: 5 }}>
             <Switch value={local} onValueChange={setlocal}></Switch>
           </View>
           <View style={{ flex: 1 }}>

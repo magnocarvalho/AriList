@@ -14,7 +14,8 @@ const BotaoServicos = ({
   nome,
   subtitle,
   icon = "office-building",
-  servico
+  servico,
+  descricao
 }) => {
   const [ctrOpen, setCtrOpen] = useState(false);
   const goServico = () => {
@@ -39,11 +40,7 @@ const BotaoServicos = ({
       {ctrOpen && (
         <>
           <Card.Content>
-            <Text style={{ textAlign: "justify" }}>
-              Infos {subtitle} Lorem Ipsum is simply dummy text of the printing
-              and typesetting industry. Lorem Ipsum {subtitle} has been the
-              industry's standard dummy text ever since the 1500s {subtitle}
-            </Text>
+            <Paragraph style={{ textAlign: "justify" }}>{descricao}</Paragraph>
           </Card.Content>
           <Card.Actions>
             <Button

@@ -2,9 +2,10 @@
   "doc": [
     {
       "titulo": "Averbação",
+      "icon": "heart-broken",
       "subtitulo": "Alteração do Estado Civil (averbação)",
       "descricao": "As alterações de estado civil dos proprietários devem ser averbadas na matrícula pois, dependendo do regime de casamento (comunhão total, comunhão parcial ou separação de bens), os cônjuges precisam anuir com futuros negócios realizados com os imóveis.",
-      "id_servico": "123dj",
+      "id": "123ddsfsfsdfj",
       "lei": "Inciso II do art. 167 da Lei nº 6.216, de 1975",
       "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
       "documentos": [
@@ -23,6 +24,61 @@
         {
           "id": "sdfsafasddfasdfasf",
           "value": "Escritura de Pacto Antenupcial original ou cópia autenticada pelo cartório que a lavrou. A Escritura não é exigida no caso de:\n• Casamentos realizados antes de 26/12/77 pelo regime de Comunhão Universal de Bens;\n• Casamentos realizados a partir de 26/12/77 pelo regime da Comunhão Parcial de Bens;\n• Casamentos realizados pelo regime da Separação Obrigatória de Bens."
+        }
+      ]
+    },
+    {
+      "titulo": "Imóvel rural",
+      "icon": "tractor",
+      "subtitulo": "Escritura pública de venda e compra de imóvel rural",
+      "descricao": "O imóvel rural, de acordo com a legislação agrária, configura-se como uma área formada por uma ou mais matrículas de terras contínuas, pertencentes a um único proprietário, com localização na zona rural ou urbana. Sua caracterização específica para aspecto rural se baseia no objetivo de sua atividade, que pode ser agrícola, pecuária, extrativa vegetal, florestal ou agroindustrial.",
+      "id": "sd1ffsf23dj",
+      "lei": "Lei nº 8.935/94,  artigo. 236 da Constituição Federal",
+      "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+      "documentos": [
+        {
+          "id": "sfsfsafasfassddfdsasdfsd",
+          "lei": "Lei dos Registros Públicos, Arts. 13 e 217",
+          "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+          "value": "Requerimento com firma reconhecida; contendo no mínimo da parte interessada, o que objetiva junto ao 2º ofício indicando o número da matrícula/transcrição"
+        },
+        {
+          "id": "sfasdssdfasdffsdfsdfsdfs",
+          "value": "Escritura pública de venda e compra do imóvel rural;"
+        },
+        {
+          "id": "sdfsaasssssssssssdfasddfasdfasf",
+          "value": "Cópias dos documentos pessoais dos vendedores – marido e mulher (RG, CPF, Certidão de casamento atualizada) ou se solteiro certidão de nascimento atualizada;"
+        },
+        {
+          "id": "sshfsdfsdfsafasdfasdflf",
+          "value": "Cópias dos documentos pessoais do comprador e esposa (RG, CPF, Certidão de casamento atualizada) ou se       solteiro certidão de nascimento atualizada"
+        },
+        {
+          "id": "sdfsfsafasfsddaf",
+          "value": "Procuração (se for o caso, atualizada e sinal público dentro da validade)"
+        },
+        {
+          "id": "sdalfjs",
+          "value": "ITR (últimos 5 anos) e Certidão da Receita Federal;"
+        },
+        { "id": "dsfadddddddddsdfs", "value": "ITBI" },
+        {
+          "id": "sdafsdcsdsfsd",
+          "value": "Certidão Negativa de Débito (Prefeitura);"
+        },
+        { "id": "sdsdsdfsdfolld", "value": "CCIR (2006/2007/2008/2009);" },
+        {
+          "id": "adfsdsddsfs",
+          "value": "Certidão negativa do IBAMA em nome dos vendedores;"
+        },
+        {
+          "id": "sdfssdsdfs",
+          "value": "Apresentar certidões de Feitos Ajuizados, tais como: (Justiça Comum; Justiça Federal; Tribunal Superior do Trabalho)."
+        },
+        {
+          "id": "sdfasfafsassdf",
+          "value": "Caso os compradores sejam casados pelo regime da comunhão parcial de bens, não necessita do pacto antenupcial, sendo qualquer outro regime, imprescindível a certidão de registro da escritura do pacto antenupcial, ou escritura acompanhada dos documentos para registro."
         }
       ]
     }
