@@ -22,7 +22,7 @@ const DocsComponente = ({ navigation }) => {
   // const docs = navigation.getParam("docs");
   const [salvo, setsalvo] = useState(false);
   const [docs, setDocs] = useState(doc[0]);
-  const [leis, setLeis] = useState([{ value: "", lei: "", link: "", id: "" }]);
+  const [leis, setLeis] = useState([]);
   const [result, setResult] = useState(null);
   const _handlePressButtonAsync = async l => {
     let result = await WebBrowser.openBrowserAsync(l);

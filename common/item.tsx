@@ -4,7 +4,7 @@ import { Card, Switch, Paragraph } from "react-native-paper";
 import * as WebBrowser from "expo-web-browser";
 import * as SecureStore from "expo-secure-store";
 
-const ItemDocumento = ({ lei, link, value, id, titulo }) => {
+const ItemDocumento = ({ lei = null, link = null, value, id, titulo }) => {
   const [local, setlocal] = useState(false);
   const [result, setResult] = useState(null);
   const _handlePressButtonAsync = async l => {
@@ -35,14 +35,16 @@ const ItemDocumento = ({ lei, link, value, id, titulo }) => {
             <TouchableOpacity onPress={() => setlocal(!local)}>
               <Paragraph style={{ textAlign: "justify" }}>{value}</Paragraph>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Paragraph
-                onPress={() => _handlePressButtonAsync(link)}
-                style={{ textDecorationLine: "underline", color: "#0317fc" }}
-              >
-                {lei}
-              </Paragraph>
-            </TouchableOpacity>
+            {lei && (
+              <TouchableOpacity>
+                <Paragraph
+                  onPress={() => _handlePressButtonAsync(link)}
+                  style={{ textDecorationLine: "underline", color: "#0317fc" }}
+                >
+                  {lei}
+                </Paragraph>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
         {/* <Button
