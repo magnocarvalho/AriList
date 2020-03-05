@@ -81,6 +81,157 @@
           "value": "Caso os compradores sejam casados pelo regime da comunhão parcial de bens, não necessita do pacto antenupcial, sendo qualquer outro regime, imprescindível a certidão de registro da escritura do pacto antenupcial, ou escritura acompanhada dos documentos para registro."
         }
       ]
+    },
+    {
+      "titulo": "Imóvel Urbano",
+      "icon": "home-city",
+      "subtitulo": "Escritura pública de venda e compra de imóvel Urbano",
+      "descricao": "A Escritura de Compra e Venda é o ato lavrado no cartório de notas por meio do qual uma das partes vende determinado bem (móvel ou imóvel) para outra.",
+      "id": "sd1ffsdsdsfsf23dj",
+      "lei": "Lei nº 8.935/94,  artigo. 236 da Constituição Federal",
+      "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+      "documentos": [
+        {
+          "id": "sfsfsafasfassddfdsasdfsd",
+          "lei": "Lei dos Registros Públicos, Arts. 13 e 217",
+          "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+          "value": "Requerimento com firma reconhecida; contendo no mínimo da parte interessada, o que objetiva junto ao 2º ofício indicando o número da matrícula/transcrição"
+        },
+        {
+          "id": "sfasssddssdfasdffsdfsdfsdfs",
+          "value": "Escritura pública de venda e compra do imóvel Urbano;"
+        },
+        {
+          "id": "sdfsaasssdfsdsssssssssdfasddfasdfasf",
+          "value": "Cópias dos documentos pessoais dos vendedores – marido e mulher (RG, CPF, Certidão de casamento atualizada) ou se solteiro certidão de nascimento atualizada;"
+        },
+        {
+          "id": "sshfssdfsdfsdfsafasdfasdflf",
+          "value": "Cópias dos documentos pessoais do comprador e esposa (RG, CPF, Certidão de casamento atualizada) ou se       solteiro certidão de nascimento atualizada"
+        },
+        {
+          "id": "sdfsfssdfsasdffasfsddaf",
+          "value": "Procuração (se for o caso, atualizada e sinal público dentro da validade)"
+        },
+        {
+          "id": "sdfsdfasdfdfssdsd",
+          "value": "Comprovante de ITBI em original;"
+        },
+        {
+          "id": "sdasdfasdflfjs",
+          "value": "Certidão Negativa de IPTU.;"
+        },
+        {
+          "id": "sdfssdfsdfasdsdfs",
+          "value": "Apresentar certidões de Feitos Ajuizados, tais como: (Justiça Comum; Justiça Federal; Tribunal Superior do Trabalho)."
+        },
+        {
+          "id": "sdasdffasfafsassdf",
+          "value": "Caso os compradores sejam casados pelo regime da comunhão parcial de bens, não necessita do pacto antenupcial, sendo qualquer outro regime, imprescindível a certidão de registro da escritura do pacto antenupcial, ou escritura acompanhada dos documentos para registro."
+        }
+      ]
+    },
+    {
+      "titulo": "Fusão",
+      "icon": "table-merge-cells",
+      "subtitulo": "Fusão de imoveis",
+      "descricao": "Quando dois ou mais imóveis contíguos pertencentes ao mesmo proprietário, constarem de matrículas autônomas, pode ele requerer a fusão destas em uma só, de novo número, encerrando-se as primitivas.",
+      "id": "sd1ffsdsdfsasdssssfdsfsf23dj",
+      "lei": "Art. 234 e 235 da Lei de Registros Públicos",
+      "link": "http://www.planalto.gov.br/ccivil_03/leis/l6015compilada.htm#234",
+      "documentos": [
+        {
+          "id": "sfsfsafasdfsd",
+          "lei": "Lei dos Registros Públicos, Arts. 13 e 217",
+          "link": "http://www.planalto.gov.br/ccivil_03/leis/l6015compilada.htm#217",
+          "value": "Requerimento com firma reconhecida; contendo no mínimo da parte interessada, o que objetiva junto ao 2º ofício indicando o número da matrícula/transcrição;  (se assinado por procurador, cópia autenticada da procuração)."
+        },
+        {
+          "id": "sfsffassddfdswwasdfsd",
+          "value": "Croqui elaborado por engenheiro ou arquiteto;"
+        },
+        {
+          "id": "sfsfsafasfassddasdfsd",
+          "value": "Certidão negativa de IPTU de todos os lotes;"
+        },
+        {
+          "id": "sfsffasfassdmmmsasdfsd",
+          "value": "Memorial Descritivo"
+        },
+        {
+          "id": "sfsfsasfassddsfsd",
+          "value": "Mapas Individuais dos lotes e mapa da Fusão"
+        },
+        {
+          "id": "sfsfsafsddfdsd",
+          "value": "Apresentar contrato social da empresa e certidão simplificada da junta comercial (pessoa jurídica) bem como fotocópias autenticadas dos documentos pessoais do proprietário: CI, CPF e certidão de casamento. (pessoa física)"
+        },
+        {
+          "id": "sfsffasefassdmmmsasdfsd",
+          "value": "ART - Anotação de Responsabilidade Técnica expedido pelo CREA"
+        }
+      ]
+    },
+    {
+      "titulo": "Georreferenciamento",
+      "icon": "map-marker-path",
+      "subtitulo": "Georreferenciamento de imoveis",
+      "descricao": "Georreferenciamento é um instrumento adotado pelo INCRA como uma forma de padronizar a identificação de imóvel rural. Ele é feito por meio de um processo de reconhecimento das coordenadas geográficas do local, a partir da utilização de mapas ou imagens",
+      "id": "dsdfadfsafsa",
+      "lei": "Art. 234 e 235 da Lei de Registros Públicos",
+      "link": "http://www.planalto.gov.br/ccivil_03/leis/l6015compilada.htm#234",
+      "documentos": [
+        {
+          "id": "sfsffsd",
+          "lei": "Lei dos Registros Públicos, Arts. 13 e 217",
+          "link": "http://www.planalto.gov.br/ccivil_03/leis/l6015compilada.htm#217",
+          "value": "Requerimento com firma reconhecida; contendo no mínimo da parte interessada, o que objetiva junto ao 2º ofício indicando o número da matrícula/transcrição;  (se assinado por procurador, cópia autenticada da procuração)."
+        },
+        {
+          "id": "sfwwfghdfhasdfsd",
+          "value": "Croqui elaborado por engenheiro ou arquiteto;"
+        },
+        {
+          "id": "sfwwfhdgasdfsd",
+          "value": "Requerimento com firma reconhecida; contendo no mínimo da parte interessada, o que objetiva junto ao 2º ofício indicando o número da matrícula/transcrição; (Lei dos Registros Públicos, Arts. 13 e 217), (se assinado por procurador, cópia autenticada da procuração)."
+        },
+        {
+          "id": "sfwwdfghdhasdfsd",
+          "value": "Mapas elaborados por profissional habilitado; "
+        },
+        {
+          "id": "sfwwasfghfdfsd",
+          "value": "CCIR; ITR dos cinco últimos anos;",
+          "lei": "art. 9º, § 5º, do Decreto 4449/02",
+          "link": "http://www.planalto.gov.br/ccivil_03/decreto/2002/D4449.htm#9"
+        },
+        {
+          "id": "sfwwafghdffsdfsd",
+          "value": "Certidão do INCRA de que a poligonal não se sobrepõe a outra;"
+        },
+        {
+          "id": "sfwwasgghgdfgdgfdfsd",
+          "value": "ART - Anotação de Responsabilidade Técnica expedido pelo CREA"
+        },
+        {
+          "id": "sfwwasdggdfgdfsd",
+          "value": "Memorial descritivo;",
+          "lei": "art. 9º, § 5º, do Decreto 4449/02",
+          "link": "http://www.planalto.gov.br/ccivil_03/decreto/2002/D4449.htm#9"
+        },
+        {
+          "id": "sfwwddfgdfasdfsd",
+          "value": "Declaração expressa dos confinantes e com firma reconhecida de que os limites divisórios foram respeitados;",
+          "lei": "art. 9º, § 5º, do Decreto 4449/02",
+          "link": "http://www.planalto.gov.br/ccivil_03/decreto/2002/D4449.htm#9"
+        },
+        {
+          "id": "ghfghrhrsssssfdg",
+          "value": "Declaração firmada sob pena de responsabilidade civil e criminal, com firma reconhecida, de que não houve alteração das divisas do imóvel registrado e de que foram respeitados os direitos dos confrontantes",
+          "lei": "art. 9º, § 5º, do Decreto 4449/02",
+          "link": "http://www.planalto.gov.br/ccivil_03/decreto/2002/D4449.htm#9"
+        }
+      ]
     }
   ]
 }

@@ -3,7 +3,7 @@
     "name": "ARI List",
     "slug": "arilist",
     "privacy": "public",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
@@ -18,12 +18,12 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#3866e6"
+      "backgroundColor": "#3060ee"
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.ari.ro",
-      "versionCode": 2,
+      "versionCode": 5,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyCQ60TcO17x5w7bLKVTWXfLIenYuudetoE"
