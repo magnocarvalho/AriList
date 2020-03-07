@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, YellowBox } from "react-native";
 import { setNavigator } from "./router/Navigation";
 import { Routes } from "./router/Router";
-import { Provider as PaperProvider } from "react-native-paper";
+import { Provider as PaperProvider, Portal } from "react-native-paper";
 import { Logs } from "expo";
+
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
 
 if (__DEV__) {
@@ -34,9 +35,11 @@ export default function App() {
   return (
     loadFont && (
       <PaperProvider>
-        <View style={styles.container}>
-          <Routes refe={setNavigator} />
-        </View>
+        <Portal>
+          <View style={styles.container}>
+            <Routes refe={setNavigator} />
+          </View>
+        </Portal>
       </PaperProvider>
     )
   );
