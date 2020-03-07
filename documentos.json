@@ -19,7 +19,8 @@
           "id": "sfasdsfsdfsdfsdfs",
           "lei": "Inciso II do art. 167 da Lei nº 6.216, de 1975",
           "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
-          "value": "Certidão de casamento (ou divórcio) original ou xerox autenticada."
+          "value": "Certidão de casamento (ou divórcio) original ou xerox autenticada.",
+          "valor": "R$ 200,00" ,   
         },
         {
           "id": "sdfsafasddfasdfasf",
@@ -40,6 +41,7 @@
           "id": "sfsfsafasfassddfdsasdfsd",
           "lei": "Lei dos Registros Públicos, Arts. 13 e 217",
           "link": "http://www.planalto.gov.br/ccivil_03/LEIS/L6015consolidado.htm#art167",
+          "valor": "R$ 200,00",
           "value": "Requerimento com firma reconhecida; contendo no mínimo da parte interessada, o que objetiva junto ao 2º ofício indicando o número da matrícula/transcrição"
         },
         {
@@ -48,6 +50,7 @@
         },
         {
           "id": "sdfsaasssssssssssdfasddfasdfasf",
+          "valor": "R$ 200,00",
           "value": "Cópias dos documentos pessoais dos vendedores – marido e mulher (RG, CPF, Certidão de casamento atualizada) ou se solteiro certidão de nascimento atualizada;"
         },
         {
@@ -99,6 +102,7 @@
         },
         {
           "id": "sfasssddssdfasdffsdfsdfsdfs",
+          "valor": "R$ 200,00",
           "value": "Escritura pública de venda e compra do imóvel Urbano;"
         },
         {
@@ -148,7 +152,8 @@
         },
         {
           "id": "sfsffassddfdswwasdfsd",
-          "value": "Croqui elaborado por engenheiro ou arquiteto;"
+          "value": "Croqui elaborado por engenheiro ou arquiteto;",
+          "valor": "R$ 200,00"
         },
         {
           "id": "sfsfsafasfassddasdfsd",
@@ -217,7 +222,8 @@
           "id": "sfwwasdggdfgdfsd",
           "value": "Memorial descritivo;",
           "lei": "art. 9º, § 5º, do Decreto 4449/02",
-          "link": "http://www.planalto.gov.br/ccivil_03/decreto/2002/D4449.htm#9"
+          "link": "http://www.planalto.gov.br/ccivil_03/decreto/2002/D4449.htm#9",
+          "valor": "R$ 200,00"
         },
         {
           "id": "sfwwddfgdfasdfsd",

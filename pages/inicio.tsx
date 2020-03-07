@@ -12,7 +12,7 @@ import {
 import Spinner from "react-native-loading-spinner-overlay";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
-import { Card, Avatar, Snackbar } from "react-native-paper";
+import { Card, Avatar, Snackbar, Paragraph } from "react-native-paper";
 import { getLocation } from "../services/localizacao";
 import { testPoint } from "../services/calculePolygon";
 import * as SecureStore from "expo-secure-store";
@@ -102,7 +102,7 @@ const Inicio = () => {
                 ></Card.Title>
               </TouchableOpacity>
             </Card>
-            <Text
+            <Paragraph
               style={{
                 textAlign: "center",
                 marginHorizontal: 5,
@@ -113,7 +113,7 @@ const Inicio = () => {
               }}
             >
               OU
-            </Text>
+            </Paragraph>
             <Card
               style={{
                 margin: 5,

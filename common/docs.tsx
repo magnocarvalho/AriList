@@ -70,6 +70,7 @@ const DocsComponente = ({ navigation }) => {
               lei={item.lei}
               id={item.id}
               titulo={docs.titulo}
+              valor={item.valor}
             ></ItemDocumento>
           )}
         ></FlatList>

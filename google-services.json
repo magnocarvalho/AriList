@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "171590076680",
+    "firebase_url": "https://arilist.firebaseio.com",
+    "project_id": "arilist",
+    "storage_bucket": "arilist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171590076680:android:11dee4c1bc6d049a6cc4bd",
+        "android_client_info": {
+          "package_name": "com.ari.ro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171590076680-tnqeca02ttdlad3bs19gdeeu3r322cho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyuJ2DcrcWGQMPfYP3sWSYAlb1ZW1K7lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171590076680-tnqeca02ttdlad3bs19gdeeu3r322cho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
