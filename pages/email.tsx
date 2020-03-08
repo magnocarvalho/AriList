@@ -6,20 +6,26 @@ import {
   ScrollView,
   TouchableOpacity,
   Animated,
-  Image,
-  TextInput
+  Image
 } from "react-native";
-import { Button, IconButton } from "react-native-paper";
+import Spinner from "react-native-loading-spinner-overlay";
+import { Button, TextInput, IconButton, Snackbar } from "react-native-paper";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
 import { Card } from "react-native-paper";
 import { googleLogin } from "../services/googleSignIn";
 import MyHeader from "../components/myHeader";
+import { criarUsuario, checkEmailUsuario } from "../services/firebaseServices";
 
 const EmailPage = () => {
   const [email, setEmail] = useState("");
   const [senha1, setsenha1] = useState("");
   const [senha2, setsenha2] = useState("");
+  const [tipoLogin, setTipo] = useState(0);
+  const [loadings, setLoad] = useState(false);
+  const [erroSnack, seterroSnack] = useState(false);
+  const [erroMensagem, setErroMensagem] = useState("");
+
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -30,18 +36,80 @@ const EmailPage = () => {
       backgroundColor: "#fff"
     },
     inputs: {
-      margin: 10,
-      borderColor: "#111",
-      borderWidth: 1,
-      fontSize: 20,
-      padding: 5
+      margin: 10
     }
   });
+
   useEffect(() => {
     setTimeout(() => {
       ref1.current.focus();
     }, 300);
   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(false);
+    }, 10000);
+  }, [loadings]);
+
+  const confirmar = async () => {
+    setLoad(true);
+    if (
+      validate(email) &&
+      senha1 === senha2 &&
+      senha1.length > 6 &&
+      senha2.length > 6
+    ) {
+      criarUsuario(email, senha1)
+        .then(async em => {
+          console.log(em);
+        })
+        .catch(async e => {
+          console.log(e);
+          await setErroMensagem(e.message);
+          await seterroSnack(true);
+        })
+        .finally(() => setLoad(false));
+    } else {
+      setLoad(false);
+    }
+  };
+
+  const validate = text => {
+    console.log(text);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(text) === false) {
+      setErroMensagem("Email is Not Correct");
+      // this.setState({ email: text });
+      seterroSnack(true);
+      return false;
+    } else {
+      // this.setState({ email: text });
+      return true;
+    }
+  };
+
+  const checkEmail = async () => {
+    setLoad(true);
+    if (validate(email)) {
+      checkEmailUsuario(email)
+        .then(async em => {
+          console.log(em);
+          if (em.length == 0) {
+            setTipo(1);
+            ref2.current.focus();
+          } else {
+            setTipo(2);
+          }
+        })
+        .catch(async e => {
+          await setErroMensagem(e.message);
+          await seterroSnack(true);
+        })
+        .finally(() => setLoad(false));
+    } else {
+      setLoad(false);
+    }
+  };
 
   return (
     <View style={estilo.page}>
@@ -53,30 +121,41 @@ const EmailPage = () => {
         <TextInput
           style={estilo.inputs}
           ref={ref1}
+          label="Email"
           placeholder="Email"
           value={email}
           keyboardType="email-address"
           onChangeText={setEmail}
           blurOnSubmit={false}
-          onSubmitEditing={() => ref2.current.focus()}
+          returnKeyType="next"
+          onSubmitEditing={() => checkEmail()}
         />
-        <TextInput
-          style={estilo.inputs}
-          placeholder="Senha"
-          ref={ref2}
-          value={senha1}
-          onChangeText={setsenha1}
-          secureTextEntry={true}
-          onSubmitEditing={() => ref3.current.focus()}
-        />
-        <TextInput
-          style={estilo.inputs}
-          placeholder="Confirmar Senha"
-          value={senha2}
-          ref={ref3}
-          secureTextEntry={true}
-          onChangeText={setsenha2}
-        />
+        {tipoLogin == 1 && (
+          <>
+            <TextInput
+              style={estilo.inputs}
+              label="Senha"
+              placeholder="Senha"
+              ref={ref2}
+              value={senha1}
+              onChangeText={setsenha1}
+              blurOnSubmit={false}
+              secureTextEntry={true}
+              onSubmitEditing={() => ref3.current.focus()}
+            />
+            <TextInput
+              style={estilo.inputs}
+              label="Confirmar a Senha"
+              placeholder="Confirmar Senha"
+              value={senha2}
+              ref={ref3}
+              blurOnSubmit={true}
+              secureTextEntry={true}
+              onChangeText={setsenha2}
+              onSubmitEditing={() => confirmar()}
+            />
+          </>
+        )}
       </ScrollView>
       <View
         style={{
@@ -88,15 +167,42 @@ const EmailPage = () => {
           flexDirection: "row",
           alignItems: "stretch",
           alignContent: "space-between",
-          backgroundColor: "green"
+          backgroundColor: "#009beb"
         }}
       >
-        <Text style={{ alignSelf: "flex-start" }}>Proximo</Text>
+        <TouchableOpacity
+          onPress={() => checkEmail()}
+          style={{ flex: 1, alignSelf: "center" }}
+        >
+          <Text
+            style={{
+              alignSelf: "flex-start",
+              color: "#fff",
+              paddingLeft: 20,
+              fontSize: 20
+            }}
+          >
+            Proximo
+          </Text>
+        </TouchableOpacity>
         <IconButton
+          onPress={checkEmail}
+          color="#fff"
           style={{ alignSelf: "flex-end" }}
           icon="arrow-right"
         ></IconButton>
       </View>
+      <Spinner
+        visible={loadings}
+        textContent={"Carregando..."}
+        textStyle={{ fontSize: 18, color: "#FFF" }}
+        overlayColor="#009beb"
+        animation="fade"
+        color="#FFF"
+      />
+      <Snackbar visible={erroSnack} onDismiss={() => seterroSnack(false)}>
+        Error {erroMensagem}
+      </Snackbar>
     </View>
   );
 };
