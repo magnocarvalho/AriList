@@ -15,17 +15,22 @@ import { navigate } from "../router/Navigation";
 import { Card } from "react-native-paper";
 import { googleLogin } from "../services/googleSignIn";
 import MyHeader from "../components/myHeader";
-import { criarUsuario, checkEmailUsuario } from "../services/firebaseServices";
+import {
+  criarUsuario,
+  checkEmailUsuario,
+  fazerLogin
+} from "../services/firebaseServices";
 
 const EmailPage = () => {
   const [email, setEmail] = useState("");
   const [senha1, setsenha1] = useState("");
   const [senha2, setsenha2] = useState("");
+  const [senha3, setsenha3] = useState("");
   const [tipoLogin, setTipo] = useState(0);
   const [loadings, setLoad] = useState(false);
   const [erroSnack, seterroSnack] = useState(false);
   const [erroMensagem, setErroMensagem] = useState("");
-
+  const [senhas, setsenhas] = useState(false);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -51,14 +56,23 @@ const EmailPage = () => {
     }, 10000);
   }, [loadings]);
 
+  const validarSenhas = () => {
+    if (senha1 === senha2 && senha1.length > 6 && senha2.length > 6) {
+      setsenhas(true);
+      return true;
+    } else {
+      setsenhas(false);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    validarSenhas();
+  }, [senha1, senha2]);
+
   const confirmar = async () => {
     setLoad(true);
-    if (
-      validate(email) &&
-      senha1 === senha2 &&
-      senha1.length > 6 &&
-      senha2.length > 6
-    ) {
+    if (validate(email) && validarSenhas()) {
       criarUsuario(email, senha1)
         .then(async em => {
           console.log(em);
@@ -70,12 +84,14 @@ const EmailPage = () => {
         })
         .finally(() => setLoad(false));
     } else {
+      await setErroMensagem("Confira suas informações");
+      await seterroSnack(true);
       setLoad(false);
     }
   };
 
   const validate = text => {
-    console.log(text);
+    // console.log(text);
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (reg.test(text) === false) {
       setErroMensagem("Email is Not Correct");
@@ -95,11 +111,28 @@ const EmailPage = () => {
         .then(async em => {
           console.log(em);
           if (em.length == 0) {
-            setTipo(1);
-            ref2.current.focus();
+            await setTipo(1);
+            await ref2.current.focus();
           } else {
             setTipo(2);
           }
+        })
+        .catch(async e => {
+          await setErroMensagem(e.message);
+          await seterroSnack(true);
+        })
+        .finally(() => setLoad(false));
+    } else {
+      setLoad(false);
+    }
+  };
+
+  const fazerLoginFB = async () => {
+    setLoad(true);
+    if (validate(email) && senha3.length > 6) {
+      fazerLogin(email, senha3)
+        .then(user => {
+          console.log(user);
         })
         .catch(async e => {
           await setErroMensagem(e.message);
@@ -156,42 +189,57 @@ const EmailPage = () => {
             />
           </>
         )}
+        {tipoLogin == 2 && (
+          <TextInput
+            style={estilo.inputs}
+            label="Senha"
+            placeholder="Senha"
+            ref={ref2}
+            value={senha3}
+            onChangeText={setsenha3}
+            blurOnSubmit={false}
+            secureTextEntry={true}
+            onSubmitEditing={() => fazerLoginFB()}
+          />
+        )}
       </ScrollView>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          flex: 1,
-          flexDirection: "row",
-          alignItems: "stretch",
-          alignContent: "space-between",
-          backgroundColor: "#009beb"
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => checkEmail()}
-          style={{ flex: 1, alignSelf: "center" }}
+      {senhas && (
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            flex: 1,
+            flexDirection: "row",
+            alignItems: "stretch",
+            alignContent: "space-between",
+            backgroundColor: "#009beb"
+          }}
         >
-          <Text
-            style={{
-              alignSelf: "flex-start",
-              color: "#fff",
-              paddingLeft: 20,
-              fontSize: 20
-            }}
+          <TouchableOpacity
+            onPress={() => confirmar()}
+            style={{ flex: 1, alignSelf: "center" }}
           >
-            Proximo
-          </Text>
-        </TouchableOpacity>
-        <IconButton
-          onPress={checkEmail}
-          color="#fff"
-          style={{ alignSelf: "flex-end" }}
-          icon="arrow-right"
-        ></IconButton>
-      </View>
+            <Text
+              style={{
+                alignSelf: "flex-start",
+                color: "#fff",
+                paddingLeft: 20,
+                fontSize: 20
+              }}
+            >
+              Proximo
+            </Text>
+          </TouchableOpacity>
+          <IconButton
+            onPress={checkEmail}
+            color="#fff"
+            style={{ alignSelf: "flex-end" }}
+            icon="arrow-right"
+          ></IconButton>
+        </View>
+      )}
       <Spinner
         visible={loadings}
         textContent={"Carregando..."}
@@ -200,8 +248,12 @@ const EmailPage = () => {
         animation="fade"
         color="#FFF"
       />
-      <Snackbar visible={erroSnack} onDismiss={() => seterroSnack(false)}>
-        Error {erroMensagem}
+      <Snackbar
+        style={{ backgroundColor: "red" }}
+        visible={erroSnack}
+        onDismiss={() => seterroSnack(false)}
+      >
+        Error! {erroMensagem}
       </Snackbar>
     </View>
   );
