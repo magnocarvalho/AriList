@@ -17,6 +17,7 @@
     "expo": "~36.0.0",
     "expo-font": "~8.0.0",
     "expo-google-sign-in": "~8.0.0",
+    "expo-linear-gradient": "~8.0.0",
     "expo-secure-store": "~8.0.0",
     "firebase": "^7.10.0",
     "react": "^16.12.0",

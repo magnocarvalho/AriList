@@ -19,6 +19,7 @@ const firebaseConfig = {
 const SplashScreen = () => {
   const welcome = ", Seja\nBem Vindo!";
   const opacity = new Animated.Value(0);
+  const [fb_test, setFbTeste] = useState(false);
   let styles = StyleSheet.create({
     texto: {
       color: "#fff",
@@ -30,14 +31,19 @@ const SplashScreen = () => {
   });
 
   useEffect(() => {
-    firebase.initializeApp(firebaseConfig);
+    if (!fb_test) return;
     Animated.timing(opacity, {
       toValue: 1,
       duration: 1000
     }).start();
+  }, [fb_test]);
+
+  useEffect(() => {
+    fb_login();
   }, []);
 
   useEffect(() => {
+    if (!fb_test) return;
     setTimeout(
       () => {
         SecureStore.getItemAsync("zona").then(async tipo => {
@@ -51,8 +57,18 @@ const SplashScreen = () => {
       },
       __DEV__ ? 1000 : 2500
     );
-  }, []);
+  }, [fb_test]);
 
+  const fb_login = async () => {
+    try {
+      if (!firebase.apps.length) {
+       await firebase.initializeApp(firebaseConfig);
+      }
+    } catch (error) {
+      alert("Erro ao conectar com os servidores da aplicação");
+    }
+    setFbTeste(true);
+  };
   return (
     <View style={styles.con}>
       <Text style={styles.texto}>

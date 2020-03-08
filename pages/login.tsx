@@ -3,17 +3,21 @@ import {
   View,
   StyleSheet,
   Text,
-  Button,
   ScrollView,
   TouchableOpacity,
   Animated,
   Image
 } from "react-native";
-
+import { Button } from "react-native-paper";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
 import { Card } from "react-native-paper";
 import { googleLogin } from "../services/googleSignIn";
+import {
+  handleAndroidBackButton,
+  removeAndroidBackButtonHandler
+} from "../router/androidBackButton";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Login = () => {
   const estilo = StyleSheet.create({
@@ -26,6 +30,10 @@ const Login = () => {
   const escolha = () => {
     return navigate("Inicio");
   };
+  useEffect(() => {
+    handleAndroidBackButton(() => navigate("Login"));
+    return removeAndroidBackButtonHandler;
+  }, []);
 
   return (
     <View style={estilo.page}>
@@ -34,17 +42,37 @@ const Login = () => {
           style={{
             flex: 1,
             flexDirection: "row",
-            backgroundColor: "red",
             alignItems: "center",
             alignSelf: "center"
           }}
         >
-          <Image
-            resizeMode="center"
-            source={require("../assets/icon.png")}
-          ></Image>
+          <TouchableOpacity onPress={() => {}}>
+            <Image
+              resizeMode="center"
+              source={require("../assets/icon.png")}
+            ></Image>
+          </TouchableOpacity>
         </View>
-        <Button title="login" color="#132"  onPress={() => googleLogin()}></Button>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <Button
+            color="red"
+            icon="google"
+            mode="outlined"
+            labelStyle={{ fontSize: 18 }}
+            style={{ marginBottom: 20 }}
+            onPress={() => googleLogin()}
+          >
+            Google login
+          </Button>
+          <Button
+            icon="email"
+            labelStyle={{ fontSize: 18 }}
+            mode="outlined"
+            onPress={() => navigate("EmailPage")}
+          >
+            Email login
+          </Button>
+        </View>
       </ScrollView>
     </View>
   );
