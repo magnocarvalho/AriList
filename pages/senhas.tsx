@@ -9,7 +9,13 @@ import {
   Image
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { Button, TextInput, IconButton, Snackbar } from "react-native-paper";
+import {
+  Button,
+  TextInput,
+  IconButton,
+  Snackbar,
+  Paragraph
+} from "react-native-paper";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
 import { Card } from "react-native-paper";
@@ -21,18 +27,15 @@ import {
   fazerLogin
 } from "../services/firebaseServices";
 
-const Senhas = () => {
-  const [email, setEmail] = useState("");
-  const [senha1, setsenha1] = useState("");
-  const [senha2, setsenha2] = useState("");
-  const [senha3, setsenha3] = useState("");
-  const [tipoLogin, setTipo] = useState(0);
-  const [emailOK, setEmailOK] = useState(false)
+const SenhasPage = ({ navigation }) => {
+  const email = navigation.getParam("email");
+
+  const [senha1, setsenha1] = useState(null);
+  const [senha2, setsenha2] = useState(null);
   const [loadings, setLoad] = useState(false);
   const [erroSnack, seterroSnack] = useState(false);
   const [erroMensagem, setErroMensagem] = useState("");
   const [senhas, setsenhas] = useState(false);
-  const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
 
@@ -48,7 +51,7 @@ const Senhas = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      ref1.current.focus();
+      ref2.current.focus();
     }, 300);
   }, []);
   useEffect(() => {
@@ -73,7 +76,7 @@ const Senhas = () => {
 
   const confirmar = async () => {
     setLoad(true);
-    if (validate(email) && validarSenhas()) {
+    if (email && validarSenhas()) {
       criarUsuario(email, senha1)
         .then(async em => {
           console.log(em);
@@ -91,192 +94,112 @@ const Senhas = () => {
     }
   };
 
-  const validate = text => {
-    // console.log(text);
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (reg.test(text) === false) {
-      setErroMensagem("Email is Not Correct");
+  // const validate = text => {
+  //   // console.log(text);
+  //   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  //   if (reg.test(text) === false) {
+  //     setErroMensagem("Email is Not Correct");
 
-      seterroSnack(true);
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const checkEmail = async () => {
-    setLoad(true);
-    if (validate(email)) {
-      checkEmailUsuario(email)
-        .then(async em => {
-          console.log(em);
-          if (em.length == 0) {
-            await setTipo(1);
-            await ref2.current.focus();
-          } else {
-            setTipo(2);
-          }
-        })
-        .catch(async e => {
-          await setErroMensagem(e.message);
-          await seterroSnack(true);
-        })
-        .finally(() => setLoad(false));
-    } else {
-      setLoad(false);
-    }
-  };
+  //     seterroSnack(true);
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // };
 
   const fazerLoginFB = async () => {
     setLoad(true);
-    if (validate(email) && senha3.length > 6) {
-      fazerLogin(email, senha3)
-        .then(user => {
-          console.log(user);
-        })
-        .catch(async e => {
-          await setErroMensagem(e.message);
-          await seterroSnack(true);
-        })
-        .finally(() => setLoad(false));
-    } else {
-      setLoad(false);
-    }
+    // if (validate(email) && senha3.length > 6) {
+    //   fazerLogin(email, senha3)
+    //     .then(user => {
+    //       console.log(user);
+    //     })
+    //     .catch(async e => {
+    //       await setErroMensagem(e.message);
+    //       await seterroSnack(true);
+    //     })
+    //     .finally(() => setLoad(false));
+    // } else {
+    setLoad(false);
+    // }
   };
 
   return (
     <View style={estilo.page}>
       <MyHeader
-        goBack={() => navigate("Login")}
-        titulo="Insira seu email"
+        goBack={() => navigate("EmailPage")}
+        titulo="Insira sua senha"
       ></MyHeader>
       <ScrollView>
         <TextInput
           style={estilo.inputs}
-          ref={ref1}
-          label="Email"
-          placeholder="Email"
-          value={email}
-          keyboardType="email-address"
-          onChangeText={setEmail}
+          label="Senha"
+          placeholder="Senha"
+          ref={ref2}
+          error={
+            senha1 != null &&
+            (senha2 != senha1 || (senha1 && senha1.length > 6))
+          }
+          value={senha1}
+          onChangeText={setsenha1}
           blurOnSubmit={false}
-          returnKeyType="next"
-          onSubmitEditing={() => checkEmail()}
+          secureTextEntry={true}
+          onSubmitEditing={() => ref3.current.focus()}
         />
-        {tipoLogin == 1 && (
-          <>
-            <TextInput
-              style={estilo.inputs}
-              label="Senha"
-              placeholder="Senha"
-              ref={ref2}
-              value={senha1}
-              onChangeText={setsenha1}
-              blurOnSubmit={false}
-              secureTextEntry={true}
-              onSubmitEditing={() => ref3.current.focus()}
-            />
-            <TextInput
-              style={estilo.inputs}
-              label="Confirmar a Senha"
-              placeholder="Confirmar Senha"
-              value={senha2}
-              ref={ref3}
-              blurOnSubmit={true}
-              secureTextEntry={true}
-              onChangeText={setsenha2}
-              onSubmitEditing={() => confirmar()}
-            />
-          </>
-        )}
-        {tipoLogin == 2 && (
-          <TextInput
-            style={estilo.inputs}
-            label="Senha"
-            placeholder="Senha"
-            ref={ref2}
-            value={senha3}
-            onChangeText={setsenha3}
-            blurOnSubmit={false}
-            secureTextEntry={true}
-            onSubmitEditing={() => fazerLoginFB()}
-          />
-        )}
+        <TextInput
+          style={estilo.inputs}
+          label="Confirmar a Senha"
+          placeholder="Confirmar Senha"
+          error={
+            senha2 != null &&
+            (senha1 != senha2 || (senha2 && senha2.length > 6))
+          }
+          value={senha2}
+          ref={ref3}
+          blurOnSubmit={true}
+          secureTextEntry={true}
+          onChangeText={setsenha2}
+          onSubmitEditing={() => confirmar()}
+        />
+        <Paragraph style={{ margin: 10 }}>
+          A senha deve conter no minimo 6 caracteres
+        </Paragraph>
       </ScrollView>
-      {senhas && (
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "stretch",
-            alignContent: "space-between",
-            backgroundColor: "#009beb"
-          }}
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "stretch",
+          alignContent: "space-between",
+          backgroundColor: "#009beb"
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => fazerLoginFB()}
+          style={{ flex: 1, alignSelf: "center" }}
         >
-          <TouchableOpacity
-            onPress={() => confirmar()}
-            style={{ flex: 1, alignSelf: "center" }}
+          <Text
+            style={{
+              alignSelf: "flex-start",
+              color: "#fff",
+              paddingLeft: 20,
+              fontSize: 20
+            }}
           >
-            <Text
-              style={{
-                alignSelf: "flex-start",
-                color: "#fff",
-                paddingLeft: 20,
-                fontSize: 20
-              }}
-            >
-              Proximo
-            </Text>
-          </TouchableOpacity>
-          <IconButton
-            onPress={checkEmail}
-            color="#fff"
-            style={{ alignSelf: "flex-end" }}
-            icon="arrow-right"
-          ></IconButton>
-        </View>
-      )}
-      {senhas && (
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "stretch",
-            alignContent: "space-between",
-            backgroundColor: "#009beb"
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => confirmar()}
-            style={{ flex: 1, alignSelf: "center" }}
-          >
-            <Text
-              style={{
-                alignSelf: "flex-start",
-                color: "#fff",
-                paddingLeft: 20,
-                fontSize: 20
-              }}
-            >
-              Proximo
-            </Text>
-          </TouchableOpacity>
-          <IconButton
-            onPress={checkEmail}
-            color="#fff"
-            style={{ alignSelf: "flex-end" }}
-            icon="arrow-right"
-          ></IconButton>
-        </View>
-      )}
+            Proximo
+          </Text>
+        </TouchableOpacity>
+        <IconButton
+          onPress={() => fazerLoginFB()}
+          color="#fff"
+          style={{ alignSelf: "flex-end" }}
+          icon="arrow-right"
+        ></IconButton>
+      </View>
       <Spinner
         visible={loadings}
         textContent={"Carregando..."}
@@ -296,4 +219,4 @@ const Senhas = () => {
   );
 };
 
-export default Senhas;
+export default SenhasPage;

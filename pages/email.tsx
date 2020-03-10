@@ -9,7 +9,14 @@ import {
   Image
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { Button, TextInput, IconButton, Snackbar } from "react-native-paper";
+import {
+  Button,
+  TextInput,
+  IconButton,
+  Snackbar,
+  Paragraph,
+  Checkbox
+} from "react-native-paper";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
 import { Card } from "react-native-paper";
@@ -89,7 +96,9 @@ const EmailPage = () => {
         .then(async em => {
           console.log(em);
           if (em.length == 0) {
+            navigate("SenhasPage", { email });
           } else {
+            navigate("SenhaPage");
           }
         })
         .catch(async e => {
@@ -112,7 +121,7 @@ const EmailPage = () => {
         <TextInput
           style={estilo.inputs}
           ref={ref1}
-          error={!emailOK}
+          error={!emailOK && email != null}
           label="Insira um email válido"
           placeholder="Email"
           value={email}
@@ -122,6 +131,15 @@ const EmailPage = () => {
           returnKeyType="next"
           onSubmitEditing={() => checkEmail()}
         />
+        <View
+          style={[
+            estilo.inputs,
+            { flex: 1, flexDirection: "row", alignItems: "center" }
+          ]}
+        >
+          <Checkbox status="checked"></Checkbox>
+          <Paragraph>Termos de uso</Paragraph>
+        </View>
       </ScrollView>
 
       <View
@@ -140,7 +158,7 @@ const EmailPage = () => {
       >
         <TouchableOpacity
           disabled={!emailOK}
-          onPress={() => confirmar()}
+          onPress={() => checkEmail()}
           style={{ flex: 1, alignSelf: "center" }}
         >
           <Text
@@ -156,7 +174,7 @@ const EmailPage = () => {
         </TouchableOpacity>
         <IconButton
           disabled={!emailOK}
-          onPress={() => confirmar()}
+          onPress={() => checkEmail()}
           color="#fff"
           style={{ alignSelf: "flex-end" }}
           icon="arrow-right"

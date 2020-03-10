@@ -8,6 +8,7 @@ import MapaEndereco from "../pages/mapaendereco";
 import DocsComponente from "../common/docs";
 import Login from "../pages/login";
 import EmailPage from "../pages/email";
+import SenhasPage from "../pages/senhas";
 
 export function useRouter() {
   const Routes = createAppContainer(
@@ -20,7 +21,8 @@ export function useRouter() {
         MapaEndereco,
         DocsComponente,
         Login,
-        EmailPage
+        EmailPage,
+        SenhasPage,
       },
       {
         initialRouteName: "SplashScreen"
