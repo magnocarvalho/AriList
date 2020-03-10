@@ -62,12 +62,14 @@ const SplashScreen = () => {
   const fb_login = async () => {
     try {
       if (!firebase.apps.length) {
-       await firebase.initializeApp(firebaseConfig);
+        await firebase.initializeApp(firebaseConfig);
+        console.log(firebase.SDK_VERSION, firebase.app().name);
       }
     } catch (error) {
       alert("Erro ao conectar com os servidores da aplicação");
+    } finally {
+      setFbTeste(true);
     }
-    setFbTeste(true);
   };
   return (
     <View style={styles.con}>

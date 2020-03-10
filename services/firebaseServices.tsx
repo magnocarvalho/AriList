@@ -13,3 +13,6 @@ export const checkEmailUsuario = async email => {
 export const fazerLogin = async (email, password) => {
   return await firebase.auth().signInWithEmailAndPassword(email, password);
 };
+export const logoutFB = async () => {
+  return await firebase.auth().signOut();
+};

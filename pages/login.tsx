@@ -69,6 +69,7 @@ const Login = () => {
             labelStyle={{ fontSize: 18 }}
             mode="outlined"
             onPress={() => navigate("EmailPage")}
+            style={{ marginBottom: 40 }}
           >
             Email login
           </Button>
