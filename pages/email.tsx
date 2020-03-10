@@ -28,7 +28,7 @@ import {
   fazerLogin,
   logoutFB
 } from "../services/firebaseServices";
-
+import * as SecureStore from "expo-secure-store";
 const EmailPage = () => {
   const [email, setEmail] = useState(null);
 
@@ -56,6 +56,10 @@ const EmailPage = () => {
       ref1.current.focus();
     }, 300);
     logoutFB();
+    SecureStore.getItemAsync("email").then(e => {
+      setEmail(e);
+      validate(e);
+    });
   }, []);
   useEffect(() => {
     setTimeout(() => {
@@ -95,6 +99,7 @@ const EmailPage = () => {
       checkEmailUsuario(email)
         .then(async em => {
           console.log(em);
+          await SecureStore.setItemAsync("email", email);
           if (em.length == 0) {
             navigate("SenhasPage", { email });
           } else {

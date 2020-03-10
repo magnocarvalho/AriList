@@ -61,7 +61,13 @@ const SenhasPage = ({ navigation }) => {
   }, [loadings]);
 
   const validarSenhas = () => {
-    if (senha1 === senha2 && senha1.length > 6 && senha2.length > 6) {
+    if (
+      senha1 &&
+      senha2 &&
+      senha1 === senha2 &&
+      senha1.length >= 6 &&
+      senha2.length >= 6
+    ) {
       setsenhas(true);
       return true;
     } else {
@@ -74,12 +80,14 @@ const SenhasPage = ({ navigation }) => {
     validarSenhas();
   }, [senha1, senha2]);
 
-  const confirmar = async () => {
+  const criarUser = async () => {
     setLoad(true);
-    if (email && validarSenhas()) {
+    console.log(email, senha2);
+    if (validarSenhas() && email && senhas) {
       criarUsuario(email, senha1)
         .then(async em => {
           console.log(em);
+          navigate("Inicio");
         })
         .catch(async e => {
           console.log(e);
@@ -94,36 +102,6 @@ const SenhasPage = ({ navigation }) => {
     }
   };
 
-  // const validate = text => {
-  //   // console.log(text);
-  //   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  //   if (reg.test(text) === false) {
-  //     setErroMensagem("Email is Not Correct");
-
-  //     seterroSnack(true);
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // };
-
-  const fazerLoginFB = async () => {
-    setLoad(true);
-    // if (validate(email) && senha3.length > 6) {
-    //   fazerLogin(email, senha3)
-    //     .then(user => {
-    //       console.log(user);
-    //     })
-    //     .catch(async e => {
-    //       await setErroMensagem(e.message);
-    //       await seterroSnack(true);
-    //     })
-    //     .finally(() => setLoad(false));
-    // } else {
-    setLoad(false);
-    // }
-  };
-
   return (
     <View style={estilo.page}>
       <MyHeader
@@ -136,13 +114,11 @@ const SenhasPage = ({ navigation }) => {
           label="Senha"
           placeholder="Senha"
           ref={ref2}
-          error={
-            senha1 != null &&
-            (senha2 != senha1 || (senha1 && senha1.length > 6))
-          }
+          error={senha1 != null && senha2 != senha1}
           value={senha1}
           onChangeText={setsenha1}
           blurOnSubmit={false}
+          maxLength={16}
           secureTextEntry={true}
           onSubmitEditing={() => ref3.current.focus()}
         />
@@ -150,19 +126,19 @@ const SenhasPage = ({ navigation }) => {
           style={estilo.inputs}
           label="Confirmar a Senha"
           placeholder="Confirmar Senha"
-          error={
-            senha2 != null &&
-            (senha1 != senha2 || (senha2 && senha2.length > 6))
-          }
+          error={senha2 != null && senha1 != senha2}
           value={senha2}
           ref={ref3}
           blurOnSubmit={true}
           secureTextEntry={true}
+          maxLength={16}
           onChangeText={setsenha2}
-          onSubmitEditing={() => confirmar()}
+          onSubmitEditing={() => criarUser()}
         />
-        <Paragraph style={{ margin: 10 }}>
-          A senha deve conter no minimo 6 caracteres
+        <Paragraph style={{ margin: 10, color: senhas ? "green" : "red" }}>
+          {senhas
+            ? "Senha escolhida correta"
+            : "Crie uma senha com no minimo 6 caracteres"}
         </Paragraph>
       </ScrollView>
       <View
@@ -172,6 +148,7 @@ const SenhasPage = ({ navigation }) => {
           left: 0,
           right: 0,
           flex: 1,
+          opacity: senhas ? 1 : 0.75,
           flexDirection: "row",
           alignItems: "stretch",
           alignContent: "space-between",
@@ -179,7 +156,8 @@ const SenhasPage = ({ navigation }) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => fazerLoginFB()}
+          disabled={!senhas}
+          onPress={() => criarUser()}
           style={{ flex: 1, alignSelf: "center" }}
         >
           <Text
@@ -194,7 +172,8 @@ const SenhasPage = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <IconButton
-          onPress={() => fazerLoginFB()}
+          disabled={!senhas}
+          onPress={() => criarUser()}
           color="#fff"
           style={{ alignSelf: "flex-end" }}
           icon="arrow-right"
