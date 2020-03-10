@@ -14,8 +14,7 @@ import {
   TextInput,
   IconButton,
   Snackbar,
-  Paragraph,
-  Checkbox
+  Paragraph
 } from "react-native-paper";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
@@ -25,19 +24,18 @@ import MyHeader from "../components/myHeader";
 import {
   criarUsuario,
   checkEmailUsuario,
-  fazerLogin,
-  logoutFB
+  fazerLogin
 } from "../services/firebaseServices";
-import * as SecureStore from "expo-secure-store";
-const EmailPage = () => {
-  const [email, setEmail] = useState(null);
 
-  const [emailOK, setEmailOK] = useState(false);
+const PassWordPage = ({ navigation }) => {
+  const email = navigation.getParam("email");
+
+  const [senha1, setsenha1] = useState(null);
+
   const [loadings, setLoad] = useState(false);
   const [erroSnack, seterroSnack] = useState(false);
   const [erroMensagem, setErroMensagem] = useState("");
-
-  const ref1 = useRef(null);
+  const [senhas, setsenhas] = useState(false);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
 
@@ -53,13 +51,8 @@ const EmailPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      ref1.current.focus();
+      ref2.current.focus();
     }, 300);
-    logoutFB();
-    SecureStore.getItemAsync("email").then(e => {
-      setEmail(e);
-      validate(e);
-    });
   }, []);
   useEffect(() => {
     setTimeout(() => {
@@ -67,86 +60,90 @@ const EmailPage = () => {
     }, 10000);
   }, [loadings]);
 
-  const confirmar = async () => {
-    setLoad(true);
-    if (emailOK) {
-      setLoad(false);
+  const validarSenhas = () => {
+    if (senha1 && senha1.length >= 6) {
+      setsenhas(true);
+      return true;
     } else {
-      await setErroMensagem("Confira suas informações");
-      await seterroSnack(true);
+      setsenhas(false);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    validarSenhas();
+  }, [senha1]);
+  const fazerLoginFB = async () => {
+    try {
+      setLoad(true);
+      if (senhas && email) {
+        fazerLogin(email, senha1)
+          .then(e => {
+            e.user.uid;
+          })
+          .catch(async er => {
+            console.log(er);
+            await setErroMensagem(er.message);
+            await seterroSnack(true);
+          })
+          .finally(() => setLoad(false));
+      } else {
+        await setErroMensagem("Senha inválida");
+        await seterroSnack(true);
+      }
+    } catch (error) {
       setLoad(false);
     }
   };
 
-  const validate = text => {
-    // console.log(text);
-    setEmail(text);
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (reg.test(text) === false) {
-      // setErroMensagem("Email is Not Correct");
-      setEmailOK(false);
-      // seterroSnack(true);
-      // return false;
-    } else {
-      setEmailOK(true);
-      // return true;
-    }
-  };
-
-  const checkEmail = async () => {
-    setLoad(true);
-    if (emailOK) {
-      checkEmailUsuario(email)
-        .then(async em => {
-          console.log(em);
-          await SecureStore.setItemAsync("email", email);
-          if (em.length == 0) {
-            navigate("SenhasPage", { email });
-          } else {
-            navigate("PassWordPage", { email });
-          }
-        })
-        .catch(async e => {
-          await setErroMensagem(e.message);
-          await seterroSnack(true);
-        })
-        .finally(() => setLoad(false));
-    } else {
-      setLoad(false);
-    }
-  };
+  //   const criarUser = async () => {
+  //     setLoad(true);
+  //     console.log(email);
+  //     if (validarSenhas() && email && senhas) {
+  //       criarUsuario(email, senha1)
+  //         .then(async em => {
+  //           console.log(em);
+  //           navigate("Inicio");
+  //         })
+  //         .catch(async e => {
+  //           console.log(e);
+  //           await setErroMensagem(e.message);
+  //           await seterroSnack(true);
+  //         })
+  //         .finally(() => setLoad(false));
+  //     } else {
+  //       await setErroMensagem("Confira suas informações");
+  //       await seterroSnack(true);
+  //       setLoad(false);
+  //     }
+  //   };
 
   return (
     <View style={estilo.page}>
       <MyHeader
-        goBack={() => navigate("Login")}
-        titulo="Insira seu email"
+        goBack={() => navigate("EmailPage")}
+        titulo="Insira sua senha"
       ></MyHeader>
       <ScrollView>
+        <Paragraph style={{ margin: 10, marginTop: 20, fontSize: 18 }}>Email: {email}</Paragraph>
         <TextInput
           style={estilo.inputs}
-          ref={ref1}
-          error={!emailOK && email != null}
-          label="Insira um email válido"
-          placeholder="Email"
-          value={email}
-          keyboardType="email-address"
-          onChangeText={e => validate(e)}
+          label="Senha*"
+          placeholder="Senha"
+          ref={ref2}
+          error={senha1 != null && senhas}
+          value={senha1}
+          onChangeText={setsenha1}
           blurOnSubmit={false}
-          returnKeyType="next"
-          onSubmitEditing={() => checkEmail()}
+          maxLength={16}
+          secureTextEntry={true}
+          onSubmitEditing={() => fazerLoginFB()}
         />
-        <View
-          style={[
-            estilo.inputs,
-            { flex: 1, flexDirection: "row", alignItems: "center" }
-          ]}
-        >
-          <Checkbox status="checked"></Checkbox>
-          <Paragraph>Termos de uso</Paragraph>
-        </View>
-      </ScrollView>
 
+        <Paragraph style={{ margin: 10, color: senhas ? "green" : "red" }}>
+          {senhas ? "" : "Senha invalida!"}
+        </Paragraph>
+      </ScrollView>
       <View
         style={{
           position: "absolute",
@@ -154,7 +151,7 @@ const EmailPage = () => {
           left: 0,
           right: 0,
           flex: 1,
-          opacity: emailOK ? 1 : 0.75,
+          opacity: senhas ? 1 : 0.75,
           flexDirection: "row",
           alignItems: "stretch",
           alignContent: "space-between",
@@ -162,8 +159,8 @@ const EmailPage = () => {
         }}
       >
         <TouchableOpacity
-          disabled={!emailOK}
-          onPress={() => checkEmail()}
+          disabled={!senhas}
+          onPress={() => fazerLoginFB()}
           style={{ flex: 1, alignSelf: "center" }}
         >
           <Text
@@ -178,14 +175,13 @@ const EmailPage = () => {
           </Text>
         </TouchableOpacity>
         <IconButton
-          disabled={!emailOK}
-          onPress={() => checkEmail()}
+          disabled={!senhas}
+          onPress={() => fazerLoginFB()}
           color="#fff"
           style={{ alignSelf: "flex-end" }}
           icon="arrow-right"
         ></IconButton>
       </View>
-
       <Spinner
         visible={loadings}
         textContent={"Carregando..."}
@@ -205,4 +201,4 @@ const EmailPage = () => {
   );
 };
 
-export default EmailPage;
+export default PassWordPage;

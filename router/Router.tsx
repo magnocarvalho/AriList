@@ -9,6 +9,7 @@ import DocsComponente from "../common/docs";
 import Login from "../pages/login";
 import EmailPage from "../pages/email";
 import SenhasPage from "../pages/senhas";
+import PassWordPage from "../pages/password";
 
 export function useRouter() {
   const Routes = createAppContainer(
@@ -23,6 +24,7 @@ export function useRouter() {
         Login,
         EmailPage,
         SenhasPage,
+        PassWordPage
       },
       {
         initialRouteName: "SplashScreen"
