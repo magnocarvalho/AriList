@@ -80,6 +80,8 @@ const PassWordPage = ({ navigation }) => {
         fazerLogin(email, senha1)
           .then(e => {
             e.user.uid;
+            setLoad(false)
+            navigate("Inicio");
           })
           .catch(async er => {
             console.log(er);
@@ -96,28 +98,6 @@ const PassWordPage = ({ navigation }) => {
     }
   };
 
-  //   const criarUser = async () => {
-  //     setLoad(true);
-  //     console.log(email);
-  //     if (validarSenhas() && email && senhas) {
-  //       criarUsuario(email, senha1)
-  //         .then(async em => {
-  //           console.log(em);
-  //           navigate("Inicio");
-  //         })
-  //         .catch(async e => {
-  //           console.log(e);
-  //           await setErroMensagem(e.message);
-  //           await seterroSnack(true);
-  //         })
-  //         .finally(() => setLoad(false));
-  //     } else {
-  //       await setErroMensagem("Confira suas informações");
-  //       await seterroSnack(true);
-  //       setLoad(false);
-  //     }
-  //   };
-
   return (
     <View style={estilo.page}>
       <MyHeader
@@ -125,13 +105,15 @@ const PassWordPage = ({ navigation }) => {
         titulo="Insira sua senha"
       ></MyHeader>
       <ScrollView>
-        <Paragraph style={{ margin: 10, marginTop: 20, fontSize: 18 }}>Email: {email}</Paragraph>
+        <Paragraph style={{ margin: 10, marginTop: 20, fontSize: 18 }}>
+          Email: {email}
+        </Paragraph>
         <TextInput
           style={estilo.inputs}
           label="Senha*"
           placeholder="Senha"
           ref={ref2}
-          error={senha1 != null && senhas}
+          error={senha1 != null && !senhas}
           value={senha1}
           onChangeText={setsenha1}
           blurOnSubmit={false}

@@ -65,6 +65,8 @@ const SplashScreen = () => {
         await firebase.initializeApp(firebaseConfig);
         console.log(firebase.SDK_VERSION, firebase.app().name);
       }
+      var current = (await firebase.app().auth().currentUser) || null;
+      console.log({ current });
     } catch (error) {
       alert("Erro ao conectar com os servidores da aplicação");
     } finally {

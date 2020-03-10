@@ -87,6 +87,7 @@ const SenhasPage = ({ navigation }) => {
       criarUsuario(email, senha1)
         .then(async em => {
           console.log(em);
+          setLoad(false)
           navigate("Inicio");
         })
         .catch(async e => {
