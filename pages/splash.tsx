@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Animated } from "react-native";
 import { navigate } from "../router/Navigation";
 import * as SecureStore from "expo-secure-store";
 import * as firebase from "firebase";
+import { getUsuario } from "../services/firebaseServices";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -20,6 +21,10 @@ const SplashScreen = () => {
   const welcome = ", Seja\nBem Vindo!";
   const opacity = new Animated.Value(0);
   const [fb_test, setFbTeste] = useState(false);
+  const [zona, setzona] = useState(null);
+  const [userLogado, setuserLogado] = useState(null);
+  let fb1 = false;
+  let fb2 = false;
   let styles = StyleSheet.create({
     texto: {
       color: "#fff",
@@ -32,9 +37,17 @@ const SplashScreen = () => {
 
   useEffect(() => {
     if (!fb_test) return;
+    if (fb_test && userLogado && zona) {
+      navigate("Servicos", { tipo: zona });
+    } else if (fb1 && fb2) {
+      navigate("Login");
+    }
+  }, [fb_test, userLogado, zona]);
+  useEffect(() => {
+    if (!fb_test) return;
     Animated.timing(opacity, {
       toValue: 1,
-      duration: 1000
+      duration: 100
     }).start();
   }, [fb_test]);
 
@@ -44,35 +57,45 @@ const SplashScreen = () => {
 
   useEffect(() => {
     if (!fb_test) return;
-    setTimeout(
-      () => {
-        SecureStore.getItemAsync("zona").then(async tipo => {
-          // console.log("zona", tipo);
-          // if (tipo) {
-          //   navigate("Servicos", { tipo: tipo });
-          // } else {
-          navigate("Login");
-          // }
-        });
-      },
-      __DEV__ ? 1000 : 2500
-    );
+    SecureStore.getItemAsync("zona")
+      .then(async tipo => {
+        // console.log("zona", tipo);
+        setzona(tipo);
+      })
+      .catch(e => setzona(null))
+      .finally(() => {
+        fb1 = true;
+      });
   }, [fb_test]);
 
   const fb_login = async () => {
     try {
       if (!firebase.apps.length) {
         await firebase.initializeApp(firebaseConfig);
-        console.log(firebase.SDK_VERSION, firebase.app().name);
+        // console.log(
+        //   firebase.SDK_VERSION,
+        //   firebase.app().name,
+        //   firebase.app().options
+        // );
       }
-      var current = (await firebase.app().auth().currentUser) || null;
-      console.log({ current });
+      // var current = (await firebase.app().auth().currentUser) || null;
+      // console.log({ current });
+      firebase.auth().languageCode = "pt-BR";
+      // console.log(await getUsuario());
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          // console.log("usuario logado", user.uid);
+          setuserLogado(user.uid);
+        }
+        fb2 = true;
+      });
     } catch (error) {
       alert("Erro ao conectar com os servidores da aplicação");
     } finally {
       setFbTeste(true);
     }
   };
+
   return (
     <View style={styles.con}>
       <Text style={styles.texto}>

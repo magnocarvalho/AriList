@@ -16,3 +16,12 @@ export const fazerLogin = async (email, password) => {
 export const logoutFB = async () => {
   return await firebase.auth().signOut();
 };
+export const getUsuario = async () => {
+  return await firebase.app().auth().currentUser;
+};
+//   let usuario: firebase.User;
+//   await firebase.auth().onAuthStateChanged(async user => {
+//     usuario = user;
+//   });
+//   return usuario;
+// };

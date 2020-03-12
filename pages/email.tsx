@@ -55,7 +55,7 @@ const EmailPage = () => {
     setTimeout(() => {
       ref1.current.focus();
     }, 300);
-    logoutFB();
+    // logoutFB();
     SecureStore.getItemAsync("email").then(e => {
       setEmail(e);
       validate(e);
