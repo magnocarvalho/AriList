@@ -1,14 +1,40 @@
-import * as React from "react";
-import { Appbar, IconButton } from "react-native-paper";
+import { Appbar, IconButton, Avatar } from "react-native-paper";
 import { navigateBack } from "../router/Navigation";
-import { StatusBar } from "react-native";
-import App from "~/App";
+import { StatusBar, Text } from "react-native";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger
+} from "react-native-popup-menu";
+import React, { useState } from "react";
 
-const MyHeader = ({ goBack, titulo = null, icon = null, iconEvent = null }) => {
+const MyHeader = ({ goBack, titulo = null }) => {
+  const [openMenu, setopenMenu] = useState(false);
   const _handleSearch = () => console.log("Searching");
 
-  const _handleMore = () => {
-    return iconEvent ? iconEvent() : console.log("Shown more");
+  const MenuCTRL = () => {
+    return (
+      <Menu opened={openMenu}>
+        <MenuTrigger>
+          <Appbar.Action
+            icon="dots-vertical"
+            onPress={() => setopenMenu(!openMenu)}
+          />
+        </MenuTrigger>
+        <MenuOptions>
+          <MenuOption onSelect={() => alert(`Save`)} text="Save" />
+          <MenuOption onSelect={() => alert(`Delete`)}>
+            <Text style={{ color: "red" }}>Sair</Text>
+          </MenuOption>
+          <MenuOption
+            onSelect={() => alert(`Not called`)}
+            disabled={true}
+            text="Disabled"
+          />
+        </MenuOptions>
+      </Menu>
+    );
   };
 
   return (
@@ -16,10 +42,7 @@ const MyHeader = ({ goBack, titulo = null, icon = null, iconEvent = null }) => {
       <Appbar.Header statusBarHeight={0}>
         <Appbar.BackAction onPress={() => goBack()} />
         <Appbar.Content title={titulo || "ARI List"} />
-        {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-        {icon && iconEvent && (
-          <IconButton color="#fff" icon={icon} onPress={_handleMore} />
-        )}
+        <MenuCTRL></MenuCTRL>
       </Appbar.Header>
     </>
   );

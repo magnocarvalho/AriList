@@ -8,6 +8,7 @@ import {
   DefaultTheme
 } from "react-native-paper";
 import { Logs } from "expo";
+import { MenuProvider } from "react-native-popup-menu";
 
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
 
@@ -53,13 +54,15 @@ export default function App() {
 
   return (
     loadFont && (
-      <PaperProvider theme={theme}>
-        <Portal>
-          <View style={styles.container}>
-            <Routes refe={setNavigator} />
-          </View>
-        </Portal>
-      </PaperProvider>
+      <MenuProvider>
+        <PaperProvider theme={theme}>
+          <Portal>
+            <View style={styles.container}>
+              <Routes refe={setNavigator} />
+            </View>
+          </Portal>
+        </PaperProvider>
+      </MenuProvider>
     )
   );
 }

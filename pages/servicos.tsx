@@ -32,7 +32,7 @@ const Servicos = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <StatusBar barStyle="default"></StatusBar>
-      <MyHeader goBack={() => navigate("Inicio")} iconEvent="info"></MyHeader>
+      <MyHeader goBack={() => navigate("Inicio")}></MyHeader>
 
       <FlatList
         ListHeaderComponent={
