@@ -1,37 +1,46 @@
-import { Appbar, IconButton, Avatar } from "react-native-paper";
-import { navigateBack } from "../router/Navigation";
-import { StatusBar, Text } from "react-native";
+import { Appbar, IconButton, Avatar, Text } from "react-native-paper";
+import { navigateBack, navigate } from "../router/Navigation";
+import { StatusBar } from "react-native";
 import {
   Menu,
   MenuOptions,
   MenuOption,
-  MenuTrigger
+  MenuTrigger,
+  renderers
 } from "react-native-popup-menu";
 import React, { useState } from "react";
+import { getUsuario, logoutFB } from "../services/firebaseServices";
 
-const MyHeader = ({ goBack, titulo = null }) => {
+const MyHeader = ({ goBack, titulo = null, tocarImob = null }) => {
   const [openMenu, setopenMenu] = useState(false);
+  const { SlideInMenu } = renderers;
   const _handleSearch = () => console.log("Searching");
+  const sairDoApp = async () => {
+    await logoutFB();
+    navigate("Login");
+  };
 
   const MenuCTRL = () => {
     return (
-      <Menu opened={openMenu}>
+      <Menu>
         <MenuTrigger>
-          <Appbar.Action
-            icon="dots-vertical"
-            onPress={() => setopenMenu(!openMenu)}
-          />
+          <Avatar.Icon icon="dots-vertical" size={44} />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption onSelect={() => alert(`Save`)} text="Save" />
-          <MenuOption onSelect={() => alert(`Delete`)}>
-            <Text style={{ color: "red" }}>Sair</Text>
+          {tocarImob && (
+            <MenuOption
+              onSelect={() => {
+                if (tocarImob) tocarImob();
+              }}
+            >
+              <Text style={{ fontSize: 20, paddingVertical: 5 }}>
+                Trocar imobiliaria
+              </Text>
+            </MenuOption>
+          )}
+          <MenuOption onSelect={() => sairDoApp()}>
+            <Text style={{ fontSize: 20, paddingVertical: 5 }}>Sair</Text>
           </MenuOption>
-          <MenuOption
-            onSelect={() => alert(`Not called`)}
-            disabled={true}
-            text="Disabled"
-          />
         </MenuOptions>
       </Menu>
     );

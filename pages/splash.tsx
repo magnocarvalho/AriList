@@ -43,6 +43,14 @@ const SplashScreen = () => {
       navigate("Login");
     }
   }, [fb_test, userLogado, zona]);
+
+  useEffect(() => {
+    setTimeout(async () => {
+      if (!userLogado && !fb2) {
+        navigate("Login");
+      }
+    }, 10000);
+  }, []);
   useEffect(() => {
     if (!fb_test) return;
     Animated.timing(opacity, {
@@ -82,13 +90,21 @@ const SplashScreen = () => {
       // console.log({ current });
       firebase.auth().languageCode = "pt-BR";
       // console.log(await getUsuario());
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          // console.log("usuario logado", user.uid);
-          setuserLogado(user.uid);
+      firebase.auth().onAuthStateChanged(
+        user => {
+          if (user) {
+            // console.log("usuario logado", user.uid);
+            setuserLogado(user.uid);
+            fb2 = true;
+          } else {
+            fb2 = true;
+          }
+        },
+        err => {
+          fb2 = true;
+          console.log(err);
         }
-        fb2 = true;
-      });
+      );
     } catch (error) {
       alert("Erro ao conectar com os servidores da aplicação");
     } finally {
