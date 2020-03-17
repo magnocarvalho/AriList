@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, YellowBox } from "react-native";
 import { setNavigator } from "./router/Navigation";
 import { Routes } from "./router/Router";
-import { Provider as PaperProvider, Portal } from "react-native-paper";
+import {
+  Provider as PaperProvider,
+  Portal,
+  DefaultTheme
+} from "react-native-paper";
 import { Logs } from "expo";
 
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
@@ -21,7 +25,22 @@ if (__DEV__) {
 console.disableYellowBox = true;
 export default function App() {
   const [loadFont] = useState(true);
-
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "#009bdb",
+      text: "#000000"
+    }
+  };
+  //  <color name="primaryColor">#009bdb</color>
+  // <color name="primaryLightColor">#60ccff</color>
+  // <color name="primaryDarkColor">#006da9</color>
+  // <color name="secondaryColor">#173f7c</color>
+  // <color name="secondaryLightColor">#4e69ac</color>
+  // <color name="secondaryDarkColor">#001a4f</color>
+  // <color name="primaryTextColor">#000000</color>
+  // <color name="secondaryTextColor">#ffffff</color>
   useEffect(() => {
     // Font.loadAsync({
     //   Roboto: require("native-base/Fonts/Roboto.ttf"),
@@ -34,7 +53,7 @@ export default function App() {
 
   return (
     loadFont && (
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <Portal>
           <View style={styles.container}>
             <Routes refe={setNavigator} />

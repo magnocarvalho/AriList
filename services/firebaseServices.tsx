@@ -1,7 +1,4 @@
 import firebase from "firebase";
-import { useState } from "react";
-// Required for side-effects
-// require("firebase/firestore");
 require("firebase/auth");
 
 export const criarUsuario = async (email, password) => {
@@ -19,9 +16,13 @@ export const logoutFB = async () => {
 export const getUsuario = async () => {
   return await firebase.app().auth().currentUser;
 };
-//   let usuario: firebase.User;
-//   await firebase.auth().onAuthStateChanged(async user => {
-//     usuario = user;
-//   });
-//   return usuario;
-// };
+
+export const userLogado = async () => {
+  return firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log("User is signed in.");
+    } else {
+      console.log("No user is signed in.");
+    }
+  });
+};
