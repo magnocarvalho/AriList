@@ -28,8 +28,8 @@ export async function googleLogin() {
       clientId = yourClientIdForUseInStandalone;
     }
     await GoogleSignIn.initAsync({
-      isOfflineEnabled: true,
-      isPromptEnabled: true,
+      // isOfflineEnabled: true,
+      // isPromptEnabled: true,
       clientId: clientId
     });
     // create a new firebase credential with the token
