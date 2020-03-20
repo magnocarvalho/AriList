@@ -18,7 +18,7 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#006da9"
+      "backgroundColor": "#004a9f"
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
@@ -42,7 +42,14 @@
       ]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ari.ro",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.171590076680-ghrj7cjailo3s75hfpm9r0bl4jd47d9n"
+        }
+      },
+      "googleServicesFile": "./GoogleService-Info.plist"
     }
   }
 }

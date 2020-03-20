@@ -10,7 +10,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 import { TextInput, IconButton, Snackbar } from "react-native-paper";
 import { navigate } from "../router/Navigation";
 import MyHeader from "../components/myHeader";
-import TextInputMask from "react-native-text-input-mask";
+// import TextInputMask from "react-native-text-input-mask";
 const CelularPage = () => {
   const [email, setEmail] = useState(null);
   const [emailOK, setEmailOK] = useState(false);
@@ -68,29 +68,7 @@ const CelularPage = () => {
         titulo="Insira seu Telefone"
       ></MyHeader>
       <ScrollView>
-        <TextInput
-          style={estilo.inputs}
-          error={!emailOK && email != null}
-          label="Insira um celular válido"
-          render={props => 
-            <TextInputMask
-              {...props}
-              refInput={ref1}
-              onChangeText={(formatted, extracted) => {
-                console.log(formatted); // +1 (123) 456-78-90
-                console.log(extracted); // 1234567890
-              }}
-              mask={"+1 ([000]) [000] [00] [00]"}
-              placeholder="(99) 99999-9999"
-              value={email}
-              keyboardType="phone-pad"
-              // onChangeText={e => validate(e)}
-              blurOnSubmit={false}
-              returnKeyType="next"
-              onSubmitEditing={() => checkCelular()}
-            />
-          }
-        />
+
       </ScrollView>
 
       <View

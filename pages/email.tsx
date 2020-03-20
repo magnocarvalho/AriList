@@ -29,6 +29,8 @@ import {
   logoutFB
 } from "../services/firebaseServices";
 import * as SecureStore from "expo-secure-store";
+import KeyboardSpacer from 'react-native-keyboard-spacer'
+
 const EmailPage = () => {
   const [email, setEmail] = useState(null);
 
@@ -185,6 +187,7 @@ const EmailPage = () => {
           icon="arrow-right"
         ></IconButton>
       </View>
+      <KeyboardSpacer />
 
       <Spinner
         visible={loadings}

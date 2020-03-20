@@ -9,6 +9,7 @@ import {
 } from "react-native-paper";
 import { Logs } from "expo";
 import { MenuProvider } from "react-native-popup-menu";
+import { primeira } from "./services/cores";
 
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
 
@@ -30,7 +31,7 @@ export default function App() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: "#009bdb",
+      primary: primeira,
       text: "#000000"
     }
   };

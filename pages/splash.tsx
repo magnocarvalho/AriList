@@ -23,8 +23,8 @@ const SplashScreen = () => {
   const [fb_test, setFbTeste] = useState(false);
   const [zona, setzona] = useState(null);
   const [userLogado, setuserLogado] = useState(null);
-  let fb1 = false;
-  let fb2 = false;
+  const [fb1,setFb1]  = useState(false);
+  const [fb2,setFb2]  = useState(false);
   let styles = StyleSheet.create({
     texto: {
       color: "#fff",
@@ -70,9 +70,11 @@ const SplashScreen = () => {
         // console.log("zona", tipo);
         setzona(tipo);
       })
-      .catch(e => setzona(null))
+      .catch(e => {
+        setzona(null);
+      })
       .finally(() => {
-        fb1 = true;
+        setFb1(true);
       });
   }, [fb_test]);
 
@@ -88,21 +90,24 @@ const SplashScreen = () => {
       }
       // var current = (await firebase.app().auth().currentUser) || null;
       // console.log({ current });
-      firebase.auth().languageCode = "pt-BR";
+      firebase.auth().languageCode = await "pt-BR";
       // console.log(await getUsuario());
-      firebase.auth().onAuthStateChanged(
+      // debugger;
+
+      await firebase.auth().onAuthStateChanged(
         user => {
           if (user) {
             // console.log("usuario logado", user.uid);
             setuserLogado(user.uid);
-            fb2 = true;
+            setFb2(true);
           } else {
-            fb2 = true;
+            setFb2(true);
           }
         },
         err => {
-          fb2 = true;
+          setFb2(true);
           console.log(err);
+          navigate("Login");
         }
       );
     } catch (error) {
