@@ -10,7 +10,7 @@ import Login from "../pages/login";
 import EmailPage from "../pages/email";
 import SenhasPage from "../pages/senhas";
 import PassWordPage from "../pages/password";
-
+import CelularPage from "../pages/celular";
 export function useRouter() {
   const Routes = createAppContainer(
     createSwitchNavigator(
@@ -24,7 +24,8 @@ export function useRouter() {
         Login,
         EmailPage,
         SenhasPage,
-        PassWordPage
+        PassWordPage,
+        CelularPage
       },
       {
         initialRouteName: "SplashScreen"

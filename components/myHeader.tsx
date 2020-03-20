@@ -10,9 +10,11 @@ import {
 } from "react-native-popup-menu";
 import React, { useState } from "react";
 import { getUsuario, logoutFB } from "../services/firebaseServices";
+import { getLocation } from "../services/localizacao";
+import Spinner from "react-native-loading-spinner-overlay";
 
-const MyHeader = ({ goBack, titulo = null, tocarImob = null }) => {
-  const [openMenu, setopenMenu] = useState(false);
+const MyHeader = ({ goBack, titulo = null }) => {
+  const [load, setload] = useState(false);
   const { SlideInMenu } = renderers;
   const _handleSearch = () => console.log("Searching");
   const sairDoApp = async () => {
@@ -27,17 +29,18 @@ const MyHeader = ({ goBack, titulo = null, tocarImob = null }) => {
           <Avatar.Icon icon="dots-vertical" size={44} />
         </MenuTrigger>
         <MenuOptions>
-          {tocarImob && (
-            <MenuOption
-              onSelect={() => {
-                if (tocarImob) tocarImob();
-              }}
-            >
-              <Text style={{ fontSize: 20, paddingVertical: 5 }}>
-                Trocar imobiliaria
-              </Text>
-            </MenuOption>
-          )}
+          <MenuOption
+            onSelect={async () => {
+              setload(true);
+              const local = await getLocation();
+              setload(false);
+              navigate("MapaEndereco", { location: local });
+            }}
+          >
+            <Text style={{ fontSize: 20, paddingVertical: 5 }}>
+              Trocar imobiliaria
+            </Text>
+          </MenuOption>
           <MenuOption onSelect={() => sairDoApp()}>
             <Text style={{ fontSize: 20, paddingVertical: 5 }}>Sair</Text>
           </MenuOption>
@@ -53,6 +56,14 @@ const MyHeader = ({ goBack, titulo = null, tocarImob = null }) => {
         <Appbar.Content title={titulo || "ARI List"} />
         <MenuCTRL></MenuCTRL>
       </Appbar.Header>
+      <Spinner
+        visible={load}
+        textContent={"Carregando..."}
+        textStyle={{ fontSize: 18, color: "#FFF" }}
+        overlayColor="#009beb"
+        animation="fade"
+        color="#FFF"
+      />
     </>
   );
 };
