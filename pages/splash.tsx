@@ -90,7 +90,8 @@ const SplashScreen = () => {
       }
       // var current = (await firebase.app().auth().currentUser) || null;
       // console.log({ current });
-      firebase.auth().languageCode = await "pt-BR";
+      // firebase.auth().languageCode = await "pt";
+      firebase.auth().useDeviceLanguage();
       // console.log(await getUsuario());
       // debugger;
 

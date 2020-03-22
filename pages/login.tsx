@@ -8,7 +8,7 @@ import {
   Animated,
   Image
 } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Snackbar } from "react-native-paper";
 import BotaoInicial from "../components/botaoInicial";
 import { navigate } from "../router/Navigation";
 import { Card } from "react-native-paper";
@@ -26,10 +26,13 @@ const Login = () => {
       backgroundColor: "#fff"
     }
   });
+  const [erros, seterros] = useState(null);
 
-  const escolha = () => {
-    return navigate("Inicio");
+  const googleLogins = () => {
+    googleLogin();
+    // return navigate("Inicio");
   };
+  // const
   useEffect(() => {
     handleAndroidBackButton(() => navigate("Login"));
     return removeAndroidBackButtonHandler;
@@ -60,7 +63,7 @@ const Login = () => {
             mode="outlined"
             labelStyle={{ fontSize: 18 }}
             style={{ marginBottom: 20 }}
-            onPress={() => googleLogin()}
+            onPress={() => googleLogins()}
           >
             Google login
           </Button>
@@ -74,6 +77,13 @@ const Login = () => {
             Email login
           </Button>
         </View>
+        <Snackbar
+          style={{ backgroundColor: "red" }}
+          visible={erros}
+          onDismiss={() => seterros(false)}
+        >
+          Falha no login do Google
+        </Snackbar>
       </ScrollView>
     </View>
   );
