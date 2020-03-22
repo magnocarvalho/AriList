@@ -46,6 +46,9 @@ const EmailPage = () => {
   const estilo = StyleSheet.create({
     page: {
       flex: 1,
+      flexGrow: 1,
+      flexDirection: "column",
+      justifyContent: "flex-start",
       backgroundColor: "#fff"
     },
     inputs: {
@@ -187,8 +190,7 @@ const EmailPage = () => {
           icon="arrow-right"
         ></IconButton>
       </View>
-      <KeyboardSpacer />
-
+      <KeyboardSpacer /> 
       <Spinner
         visible={loadings}
         textContent={"Carregando..."}

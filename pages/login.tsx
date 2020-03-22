@@ -23,13 +23,23 @@ const Login = () => {
   const estilo = StyleSheet.create({
     page: {
       flex: 1,
+      flexGrow: 1,
+      flexDirection: "column",
+      justifyContent: "flex-start",
       backgroundColor: "#fff"
     }
   });
   const [erros, seterros] = useState(null);
 
   const googleLogins = async () => {
-    await googleLogin();
+    try {
+      const usuario = await googleLogin();
+      if (usuario) {
+        navigate("Inicio");
+      } else throw "Error";
+    } catch (error) {
+      seterros(true);
+    }
     // return navigate("Inicio");
   };
   // const
@@ -77,14 +87,14 @@ const Login = () => {
             Email login
           </Button>
         </View>
-        <Snackbar
-          style={{ backgroundColor: "red" }}
-          visible={erros}
-          onDismiss={() => seterros(false)}
-        >
-          Falha no login do Google
-        </Snackbar>
       </ScrollView>
+      <Snackbar
+        style={{ backgroundColor: "red" }}
+        visible={erros}
+        onDismiss={() => seterros(false)}
+      >
+        Falha no login do Google
+      </Snackbar>
     </View>
   );
 };

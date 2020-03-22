@@ -50,8 +50,7 @@ export const googleLogin = async () => {
         user.auth.accessToken
       );
       console.log(credential);
-      const sucesso = await firebase.auth().signInWithCredential(credential);
-      navigate("Inicio")
+      return await firebase.auth().signInWithCredential(credential);
     } else {
       console.log("cancelado");
     }

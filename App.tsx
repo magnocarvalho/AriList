@@ -10,6 +10,7 @@ import {
 import { Logs } from "expo";
 import { MenuProvider } from "react-native-popup-menu";
 import { primeira } from "./services/cores";
+import * as firebase from "firebase";
 
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
 
@@ -24,6 +25,23 @@ if (__DEV__) {
     Logs.enableExpoCliLogging();
   }
 }
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD_ya1LE-M2so3OrcpgaxKmAUY2BqvDgB8",
+  authDomain: "arilist.firebaseapp.com",
+  databaseURL: "https://arilist.firebaseio.com",
+  projectId: "arilist",
+  storageBucket: "arilist.appspot.com",
+  messagingSenderId: "171590076680",
+  appId: "1:171590076680:web:162d6d6b8bdda3696cc4bd",
+  measurementId: "G-TWZCQT82WL"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+firebase.auth().useDeviceLanguage();
+
 console.disableYellowBox = true;
 export default function App() {
   const [loadFont] = useState(true);
