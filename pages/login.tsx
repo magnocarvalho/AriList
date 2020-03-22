@@ -28,8 +28,8 @@ const Login = () => {
   });
   const [erros, seterros] = useState(null);
 
-  const googleLogins = () => {
-    googleLogin();
+  const googleLogins = async () => {
+    await googleLogin();
     // return navigate("Inicio");
   };
   // const

@@ -30,6 +30,13 @@
             {
               "client_id": "171590076680-tnqeca02ttdlad3bs19gdeeu3r322cho.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "171590076680-ghrj7cjailo3s75hfpm9r0bl4jd47d9n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ari.ro"
+              }
             }
           ]
         }
