@@ -32,7 +32,7 @@ const CelularPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      ref1.current.focus();
+      // ref1.current.focus();
     }, 300);
     // logoutFB();
   }, []);

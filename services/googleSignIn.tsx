@@ -59,15 +59,7 @@ export const googleLogin = async () => {
         );
         let crd = await firebase.auth().signInWithCredential(credential);
       }
-      // firebase
-      //   .database()
-      //   .ref("usuario/" + googleProfileData.uid)
-      //   .once("value", snapshot => {
-      //     // console.log('lista todas', snapshot)
-      //   })
-      //   .then(res => {
-      //     // setconversation(tmp.sort(e => e.createdAt));
-      //   });
+
       try {
         let tm = await firebase
           .database()

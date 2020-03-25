@@ -36,13 +36,13 @@ const SplashScreen = () => {
       await firebase.auth().onAuthStateChanged(
         user => {
           if (user) {
-            debugger;
+           
             SecureStore.getItemAsync("zona")
               .then(async zona => {
                 if (zona) {
                   navigate("Servicos", { tipo: zona });
                 } else {
-                  navigate("Inicio");
+                  navigate("CelularPage");
                 }
               })
               .catch(e => {
