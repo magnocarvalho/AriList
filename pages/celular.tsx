@@ -13,6 +13,8 @@ import MyHeader from "../components/myHeader";
 // import TextInputMask from "react-native-text-input-mask";
 const CelularPage = () => {
   const [email, setEmail] = useState(null);
+  const [ddd, setDDD] = useState(null);
+  const [telefone, setTelefone] = useState(null);
   const [emailOK, setEmailOK] = useState(false);
   const [loadings, setLoad] = useState(false);
   const [erroSnack, seterroSnack] = useState(false);
@@ -58,7 +60,7 @@ const CelularPage = () => {
   };
 
   const checkCelular = () => {
-    alert(email);
+    // alert(email);
   };
 
   return (
@@ -68,7 +70,20 @@ const CelularPage = () => {
         titulo="Insira seu Telefone"
       ></MyHeader>
       <ScrollView>
-
+        {/* <TextInput></TextInput> */}
+        <View style={{ flex: 0, flexDirection: "row" }}>
+          <View style={{ flex: 0, flexDirection: "row", minWidth: 60 }}>
+            <TextInput label="DDD" value={ddd} onChangeText={setDDD} />
+          </View>
+          <View>
+            <TextInput
+              style={{ flex: 1, flexDirection: "row" }}
+              label="TELEFONE"
+              value={telefone}
+              onChangeText={setTelefone}
+            />
+          </View>
+        </View>
       </ScrollView>
 
       <View

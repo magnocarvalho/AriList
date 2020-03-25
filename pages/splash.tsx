@@ -42,7 +42,7 @@ const SplashScreen = () => {
                 if (zona) {
                   navigate("Servicos", { tipo: zona });
                 } else {
-                  navigate("CelularPage");
+                  navigate("Inicio");
                 }
               })
               .catch(e => {
