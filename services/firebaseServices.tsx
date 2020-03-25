@@ -24,7 +24,21 @@ export const checkEmailUsuario = async email => {
   return await firebase.auth().fetchSignInMethodsForEmail(email);
 };
 export const fazerLogin = async (email, password) => {
-  return await firebase.auth().signInWithEmailAndPassword(email, password);
+  let usuario = await firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password);
+  await firebase
+    .database()
+    .ref("usuario/" + usuario.user.uid)
+    .set({
+      email: usuario.user.email,
+      photoURL: usuario.user.photoURL,
+      numero: usuario.user.phoneNumber,
+      nome: usuario.user.displayName,
+      createdAt: new Date().toString(),
+      provider: "EMAIL"
+    });
+  return usuario;
 };
 export const logoutFB = async () => {
   await SecureStore.deleteItemAsync("zona");

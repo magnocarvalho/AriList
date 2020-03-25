@@ -6,7 +6,7 @@ import * as firebase from "firebase";
 import { getUsuario } from "../services/firebaseServices";
 import { Snackbar } from "react-native-paper";
 import * as GoogleSignIn from "expo-google-sign-in";
-
+import { DotIndicator } from "react-native-indicators";
 // Initialize Firebase
 
 const SplashScreen = () => {
@@ -22,10 +22,16 @@ const SplashScreen = () => {
       color: "#fff",
       fontSize: 40,
       alignItems: "center",
-      textAlign: "center"
+      textAlign: "center",
+      paddingBottom: 30
     },
     con: { alignItems: "center", textAlign: "center" }
   });
+  useEffect(() => {
+    setTimeout(() => {
+      setFbTeste(true);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     fb_login();
@@ -36,7 +42,6 @@ const SplashScreen = () => {
       await firebase.auth().onAuthStateChanged(
         user => {
           if (user) {
-           
             SecureStore.getItemAsync("zona")
               .then(async zona => {
                 if (zona) {
@@ -71,6 +76,7 @@ const SplashScreen = () => {
       <Text style={styles.texto}>
         Olá<Animated.Text style={{ opacity }}>{welcome}</Animated.Text>
       </Text>
+      {fb_test && <DotIndicator color="white"></DotIndicator>}
       <Snackbar
         style={{ backgroundColor: "red" }}
         visible={fb1}
