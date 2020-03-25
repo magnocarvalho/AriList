@@ -37,20 +37,24 @@ export const googleLogin = async () => {
     });
     await GoogleSignIn.askForPlayServicesAsync();
     const result = await GoogleSignIn.signInAsync();
+    const data = await GoogleSignIn.GoogleAuthentication.prototype.toJSON();
     if (result.type === "success") {
       // const { idToken, accessToken } = result;
       const user = await GoogleSignIn.signInSilentlyAsync();
       // debugger;
-      // let tmp = await GoogleSignIn.getCurrentUser()
-      // firebase.auth.GoogleAuthProvider.credential()
-      // URLSchemes
-      // OAuthRedirec
-      const credential = await firebase.auth.GoogleAuthProvider.credential(
-        user.auth.idToken,
-        user.auth.accessToken
-      );
-      console.log(credential);
-      return await firebase.auth().signInWithCredential(credential);
+      let googleProfileData = await GoogleSignIn.getCurrentUser();
+      await firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      // debugger;
+      if (data.idToken) {
+        const credential = await firebase.auth.GoogleAuthProvider.credential(
+          data.idToken,
+          data.accessToken
+        );
+        let crd = await firebase.auth().signInWithCredential(credential);
+      }
+      return await googleProfileData;
     } else {
       console.log("cancelado");
     }
