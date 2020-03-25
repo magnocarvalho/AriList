@@ -9,6 +9,11 @@ import * as AppAuth from "expo-app-auth";
 import { Platform } from "react-native";
 import Expo, { AuthSession } from "expo";
 const { OAuthRedirect, URLSchemes } = AppAuth;
+// import {
+//   getUniqueId,
+//   getManufacturer,
+//   getPhoneNumber
+// } from "react-native-device-info";
 
 // Calling this function will open Google for login.
 export const googleLogin = async () => {
@@ -47,13 +52,39 @@ export const googleLogin = async () => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       // debugger;
-      if (data.idToken) {
+      if (googleProfileData.auth.idToken) {
         const credential = await firebase.auth.GoogleAuthProvider.credential(
-          data.idToken,
-          data.accessToken
+          googleProfileData.auth.idToken,
+          googleProfileData.auth.accessToken
         );
         let crd = await firebase.auth().signInWithCredential(credential);
       }
+      // firebase
+      //   .database()
+      //   .ref("usuario/" + googleProfileData.uid)
+      //   .once("value", snapshot => {
+      //     // console.log('lista todas', snapshot)
+      //   })
+      //   .then(res => {
+      //     // setconversation(tmp.sort(e => e.createdAt));
+      //   });
+      try {
+        let tm = await firebase
+          .database()
+          .ref("usuario/" + googleProfileData.uid)
+          .set({
+            email: googleProfileData.email,
+            photoURL: googleProfileData.photoURL,
+            firstName: googleProfileData.firstName,
+            lastName: googleProfileData.lastName,
+            nome: googleProfileData.displayName,
+            createdAt: new Date().toString(),
+            provider: "GOOGLE"
+          });
+      } catch (error) {
+        console.log("cancelado firebase", error);
+      }
+
       return await googleProfileData;
     } else {
       console.log("cancelado");

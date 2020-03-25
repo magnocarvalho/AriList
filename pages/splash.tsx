@@ -5,6 +5,7 @@ import * as SecureStore from "expo-secure-store";
 import * as firebase from "firebase";
 import { getUsuario } from "../services/firebaseServices";
 import { Snackbar } from "react-native-paper";
+import * as GoogleSignIn from "expo-google-sign-in";
 
 // Initialize Firebase
 
@@ -35,6 +36,7 @@ const SplashScreen = () => {
       await firebase.auth().onAuthStateChanged(
         user => {
           if (user) {
+            debugger;
             SecureStore.getItemAsync("zona")
               .then(async zona => {
                 if (zona) {
