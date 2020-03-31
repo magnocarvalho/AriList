@@ -3,7 +3,7 @@
     "name": "ARI List",
     "slug": "arilist",
     "privacy": "public",
-    "version": "0.0.10",
+    "version": "0.1.2",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
@@ -23,7 +23,7 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.ari.ro",
-      "versionCode":10,
+      "versionCode":11,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyCQ60TcO17x5w7bLKVTWXfLIenYuudetoE"

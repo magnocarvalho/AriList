@@ -52,13 +52,13 @@ export const googleLogin = async () => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       // debugger;
-      if (googleProfileData.auth.idToken) {
-        const credential = await firebase.auth.GoogleAuthProvider.credential(
-          googleProfileData.auth.idToken,
-          googleProfileData.auth.accessToken
-        );
-        let crd = await firebase.auth().signInWithCredential(credential);
-      }
+      // if (googleProfileData.auth.idToken) {
+      //   const credential = await firebase.auth.GoogleAuthProvider.credential(
+      //     googleProfileData.auth.idToken,
+      //     googleProfileData.auth.accessToken
+      //   );
+      //   let crd = await firebase.auth().signInWithCredential(credential);
+      // }
 
       try {
         let tm = await firebase

@@ -1,6 +1,6 @@
 import { Appbar, IconButton, Avatar, Text } from "react-native-paper";
 import { navigateBack, navigate } from "../router/Navigation";
-import { StatusBar } from "react-native";
+import { StatusBar, View } from "react-native";
 import {
   Menu,
   MenuOptions,
@@ -37,12 +37,36 @@ const MyHeader = ({ goBack, titulo = null }) => {
               navigate("MapaEndereco", { location: local });
             }}
           >
-            <Text style={{ fontSize: 20, paddingVertical: 5 }}>
+            <Text
+              style={{
+                fontSize: 18,
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                flex: 1
+              }}
+            >
               Trocar imobiliaria
             </Text>
           </MenuOption>
+          <View
+            style={{
+              flex: 1,
+              borderColor: "#eee",
+              borderWidth: 1,
+              opacity: 0.5
+            }}
+          ></View>
           <MenuOption onSelect={() => sairDoApp()}>
-            <Text style={{ fontSize: 20, paddingVertical: 5 }}>Sair</Text>
+            <Text
+              style={{
+                fontSize: 18,
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                flex: 1
+              }}
+            >
+              Sair
+            </Text>
           </MenuOption>
         </MenuOptions>
       </Menu>

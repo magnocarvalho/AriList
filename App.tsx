@@ -11,6 +11,7 @@ import { Logs } from "expo";
 import { MenuProvider } from "react-native-popup-menu";
 import { primeira } from "./services/cores";
 import * as firebase from "firebase";
+import { NavigationContainer } from "@react-navigation/native";
 
 YellowBox.ignoreWarnings(["VirtualizedLists should never be nested"]); // TODO: Remove when fixed
 
@@ -73,15 +74,17 @@ export default function App() {
 
   return (
     loadFont && (
-      <MenuProvider>
-        <PaperProvider theme={theme}>
-          <Portal>
-            <View style={styles.container}>
-              <Routes refe={setNavigator} />
-            </View>
-          </Portal>
-        </PaperProvider>
-      </MenuProvider>
+      <NavigationContainer>
+        <MenuProvider>
+          <PaperProvider theme={theme}>
+            <Portal>
+              <View style={styles.container}>
+                <Routes refe={setNavigator} />
+              </View>
+            </Portal>
+          </PaperProvider>
+        </MenuProvider>
+      </NavigationContainer>
     )
   );
 }

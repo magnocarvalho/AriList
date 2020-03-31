@@ -30,7 +30,7 @@ export const fazerLogin = async (email, password) => {
   await firebase
     .database()
     .ref("usuario/" + usuario.user.uid)
-    .set({
+    .update({
       email: usuario.user.email,
       photoURL: usuario.user.photoURL,
       numero: usuario.user.phoneNumber,
